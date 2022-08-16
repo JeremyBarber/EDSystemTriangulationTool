@@ -1,6 +1,6 @@
 ﻿using Edsm.Sdk.Model.Edsm.Systems.System;
 
-namespace EDSMTriangulationTool
+namespace EDSMTriangulationTool.NewFolder
 {
     internal interface IModel
     {

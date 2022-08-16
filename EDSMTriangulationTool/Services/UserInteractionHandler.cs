@@ -1,6 +1,6 @@
 ﻿using Figgle;
 
-namespace EDSMTriangulationTool
+namespace EDSMTriangulationTool.NewFolder
 {
     internal class UserInteractionHandler : IUserInteractionHandler
     {
@@ -168,7 +168,7 @@ namespace EDSMTriangulationTool
                 Console.Write($"\r{spinnerPosition[spinnerIndex]}");
 
                 spinnerIndex++;
-                spinnerIndex = spinnerIndex % (spinnerPosition.Count - 1);
+                spinnerIndex %= (spinnerPosition.Count - 1);
 
                 Thread.Sleep(TimeSpan.FromMilliseconds(100));
             }

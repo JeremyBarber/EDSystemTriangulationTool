@@ -1,7 +1,7 @@
 ﻿using Edsm.Sdk;
 using Edsm.Sdk.Model.Edsm.Systems.System;
 
-namespace EDSMTriangulationTool
+namespace EDSMTriangulationTool.NewFolder
 {
     internal class Model : IModel
     {
@@ -38,7 +38,7 @@ namespace EDSMTriangulationTool
 
         public async Task DeleteLastSource()
         {
-            if (Sources.Count == 0)
+            if (!Sources.Any())
             {
                 return;
             }

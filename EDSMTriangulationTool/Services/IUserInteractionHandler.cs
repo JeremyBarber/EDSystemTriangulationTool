@@ -1,4 +1,4 @@
-﻿namespace EDSMTriangulationTool
+﻿namespace EDSMTriangulationTool.NewFolder
 {
     internal interface IUserInteractionHandler
     {
