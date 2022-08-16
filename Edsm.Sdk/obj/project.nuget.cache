@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "i9o6JN5DNkeUFTpVMhzmOeqr2EK1UFAteob3rwmzG8bapwD0/Bj2kHqD8D5GOItz4OOO7qyJwrgYbDRz06is1Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\conta\\workspace\\EDSystemTriangulationTool\\Edsm.Sdk\\Edsm.Sdk.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\conta\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
