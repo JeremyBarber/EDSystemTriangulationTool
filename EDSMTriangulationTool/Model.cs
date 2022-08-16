@@ -3,9 +3,9 @@ using Edsm.Sdk.Model.Edsm.Systems.System;
 
 namespace EDSMTriangulationTool
 {
-    internal class Model
+    internal class Model : IModel
     {
-        private readonly EdsmClient _client = new EdsmClient(new HttpClient());
+        private readonly IEdsmClient _client;
 
         private readonly Dictionary<string, SphereSystemsResponse> Cache = new();
 
@@ -13,7 +13,7 @@ namespace EDSMTriangulationTool
 
         public HashSet<string> Targets { get; private set; } = new();
 
-        public Model(EdsmClient client)
+        public Model(IEdsmClient client)
         {
             _client = client;
         }
@@ -50,12 +50,12 @@ namespace EDSMTriangulationTool
 
         private async Task UpdateTriangulation()
         {
-            if (Sources.Count == 0)
+            if (!Sources.Any())
             {
                 Targets = new HashSet<string>();
                 return;
             }
-            
+
             var targetList = await QuerySystemsResponseCache(Sources.First());
 
             foreach (var source in Sources.Skip(1))

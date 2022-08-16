@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 
 namespace Edsm.Sdk
 {
-    public class EdsmClient
+    public class EdsmClient : IEdsmClient
     {
         private readonly HttpClient _client;
 

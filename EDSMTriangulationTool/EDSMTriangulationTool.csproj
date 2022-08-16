@@ -9,17 +9,13 @@
 
   <ItemGroup>
     <PackageReference Include="Figgle" Version="0.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Edsm.Sdk\Edsm.Sdk.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="EdsmTriangulationInput.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

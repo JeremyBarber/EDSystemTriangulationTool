@@ -2,28 +2,32 @@
 
 namespace EDSMTriangulationTool
 {
-    internal class UserInteractionHandler
+    internal class UserInteractionHandler : IUserInteractionHandler
     {
-        private static Model _model;
+        private readonly IModel _model;
 
-        private static bool finished = false;
+        private readonly Dictionary<char, (string description, Action method)> _options;
 
-        private static readonly Dictionary<char, (string description, Action method)> Options = new()
-        {
-            { '1', ("ADD new source system", AddSystem) },
-            { '2', ("REMOVE the most recent source system", DeleteSystem) },
-            { '3', ("HELP with using the tool", Help) },
-            { '4', ("CLOSE the program", Exit) }
-        };
+        private readonly int _targetDisplayLimit = 5;
 
-        public UserInteractionHandler(Model model)
+        private bool _finished = false;
+
+        public UserInteractionHandler(IModel model)
         {
             _model = model;
+
+            _options = new()
+            {
+                { '1', ("ADD new source system", AddSystem) },
+                { '2', ("REMOVE the most recent source system", DeleteSystem) },
+                { '3', ("HELP with using the tool", Help) },
+                { '4', ("CLOSE the program", Exit) }
+            };
         }
 
         public void EntryPoint()
         {
-            while(!finished)
+            while (!_finished)
             {
                 RefreshTopText();
                 PostOptions();
@@ -35,18 +39,18 @@ namespace EDSMTriangulationTool
             var sources = _model.Sources;
             var targets = _model.Targets;
 
-            var sourcesList = sources.Count > 0 ? sources.Select(x => $"{x.systemName} ({x.minRadius}-{x.radius}LY)").ToList() : new List<string> { "None" };
+            var sourcesList = sources.Any() ? sources.Select(x => $"{x.systemName} ({x.minRadius}-{x.radius}LY)").ToList() : new List<string> { "None" };
 
-            var targetsList = targets.Count > 0 ? targets.ToList() : new List<string> { "None" };
-            if (targetsList.Count > 5)
+            var targetsList = targets.Any() ? targets.ToList() : new List<string> { "None" };
+            if (targetsList.Count > _targetDisplayLimit)
             {
-                var notDisplayedCount = targetsList.Count - 5;
-                targetsList = targetsList.Take(5).ToList();
+                var notDisplayedCount = targetsList.Count - _targetDisplayLimit;
+                targetsList = targetsList.Take(_targetDisplayLimit).ToList();
                 targetsList.Add($"... and {notDisplayedCount} others");
             }
 
             Console.Clear();
-            Console.WriteLine(FiggleFonts.Slant.Render("ED STT"));
+            Console.WriteLine(FiggleFonts.Slant.Render("E:D - STT"));
             Console.WriteLine("========================================================================");
             Console.WriteLine("");
             Console.WriteLine("Greetings CMDR, welcome to the Elite Dangerous System Triangulation Tool");
@@ -63,7 +67,7 @@ namespace EDSMTriangulationTool
         private void PostOptions()
         {
             Console.WriteLine("Please select from the following options, CMDR:");
-            Console.WriteLine(string.Join(Environment.NewLine, Options.Select(kvp => $"{kvp.Key} - {kvp.Value.description}")));
+            Console.WriteLine(string.Join(Environment.NewLine, _options.Select(kvp => $"{kvp.Key} - {kvp.Value.description}")));
             ProcessOption();
         }
 
@@ -73,9 +77,9 @@ namespace EDSMTriangulationTool
 
             RefreshTopText();
 
-            if (Options.ContainsKey(option))
+            if (_options.ContainsKey(option))
             {
-                Options[option].method();
+                _options[option].method();
             }
             else
             {
@@ -84,7 +88,7 @@ namespace EDSMTriangulationTool
             }
         }
 
-        private static void AddSystem()
+        private void AddSystem()
         {
             Console.WriteLine("Enter the name of your source system");
             var sourceSystemName = Console.ReadLine();
@@ -132,14 +136,14 @@ namespace EDSMTriangulationTool
             SpinDuringTask(systemTriangulationTask);
         }
 
-        private static void DeleteSystem()
+        private void DeleteSystem()
         {
             var systemTriangulationTask = _model.DeleteLastSource();
             Console.WriteLine("Triangulating target systems");
             SpinDuringTask(systemTriangulationTask);
         }
 
-        private static void Help()
+        private void Help()
         {
             Console.WriteLine("");
 
@@ -147,10 +151,10 @@ namespace EDSMTriangulationTool
         }
 
 
-        private static void Exit()
+        private void Exit()
         {
             Console.WriteLine("Goodbye CMDR, safe travels in the black...");
-            finished = true;
+            _finished = true;
             WaitBeforeContinuing();
         }
 

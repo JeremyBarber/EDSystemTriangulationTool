@@ -1,15 +1,24 @@
 ﻿using Edsm.Sdk;
 using EDSMTriangulationTool;
+using Microsoft.Extensions.DependencyInjection;
 
 try
 {
-    var client = new EdsmClient(new HttpClient());
-    var model = new Model(client);
-    var interactions = new UserInteractionHandler(model);
+    var serviceCollection = new ServiceCollection();
 
-    interactions.EntryPoint();
+    serviceCollection.AddHttpClient();
+    serviceCollection.AddTransient<IEdsmClient, EdsmClient>();
+    serviceCollection.AddTransient<IModel, Model>();
+    serviceCollection.AddSingleton<IUserInteractionHandler, UserInteractionHandler>();
+
+    var serviceProvider = serviceCollection.BuildServiceProvider();
+
+    var userInteractionHandler = serviceProvider.GetService<IUserInteractionHandler>();
+
+    userInteractionHandler?.EntryPoint();
 }
 catch (Exception ex)
 {
-    Console.WriteLine($"Something went wrong: {ex.Message}");
+    Console.WriteLine($"Apologies CMDR, an unrecoverable error has been detected and the program needs to exit: {ex.Message}");
+    Console.ReadKey();
 }
