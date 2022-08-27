@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Edsm.Sdk.Model.Edsm.Types;
+using static Edsm.Sdk.Model.Edsm.Types.Star;
 
 namespace Edsm.Sdk.Model.Edsm.Systems.System
 {
@@ -17,7 +19,7 @@ namespace Edsm.Sdk.Model.Edsm.Systems.System
         public readonly bool requirePermit;
         public readonly string permitName;
         public readonly Information information;
-        public readonly PrimaryStar primaryStar;
+        public readonly StarShort primaryStar;
         public readonly DateTime hiddenAt;
         public readonly int mergedTo;
 
@@ -31,7 +33,7 @@ namespace Edsm.Sdk.Model.Edsm.Systems.System
             bool requirePermit,
             string permitName,
             Information information,
-            PrimaryStar primaryStar,
+            StarShort primaryStar,
             DateTime hiddenAt,
             int mergedTo)
         {

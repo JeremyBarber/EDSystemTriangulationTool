@@ -1,5 +1,6 @@
 ﻿using Edsm.Sdk;
-using EDSMTriangulationTool.NewFolder;
+using EDSMTriangulationCore.Services;
+using EDSMTriangulationTool.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 try

@@ -1,6 +1,7 @@
-﻿using Figgle;
+﻿using EDSMTriangulationCore.Services;
+using Figgle;
 
-namespace EDSMTriangulationTool.NewFolder
+namespace EDSMTriangulationTool.Services
 {
     internal class UserInteractionHandler : IUserInteractionHandler
     {

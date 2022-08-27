@@ -18,7 +18,7 @@ namespace Edsm.Sdk.Model.Edsm.Enums
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            var value = reader?.Value?.ToString()
+           var value = reader?.Value?.ToString()
                 ?.Replace(" ", "")
                 ?.Replace("-", "")
                 ?.Replace("(", "_")
