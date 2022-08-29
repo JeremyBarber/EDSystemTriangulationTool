@@ -46,14 +46,11 @@ jobs:
           tag_prefix: "v"
           major_pattern: "(MAJOR)"
           minor_pattern: "(MINOR)"
-          format: "${major}.${minor}.${patch}-prerelease${increment}"
+          format: "${major}.${minor}.${patch}.{increment}"
           bump_each_commit: false
           
-      - name: What Version Was That?
-        run: echo ${{ steps.version.outputs.version}}
-          
       - name: Build MAUI Windows
-        run: dotnet build -c Release -f net6.0-windows10.0.19041.0 --no-restore .\src\EDSMTriangulation.sln
+        run: dotnet build -c Release -f net6.0-windows10.0.19041.0 /p:AssemblyVersion=${{steps.version.outputs.version}} --no-restore .\src\EDSMTriangulation.sln
         
       - name: Publish MAUI Windows
         run: dotnet publish -c Release -f net6.0-windows10.0.19041.0 --no-build .\src\EDSMTriangulation.sln
