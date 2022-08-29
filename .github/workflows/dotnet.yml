@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Install workloads
-      run: dotnet workload restore /.src/
+      run: dotnet workload restore --project ./src/EdsmTriangulationInterface/EdsmTriangulationInterface.csproj
     - name: Restore dependencies
-      run: dotnet restore ./src/
+      run: dotnet restore ./src/EDSMTriangulation.sln
     - name: Build
-      run: dotnet build ./src/ --no-restore
+      run: dotnet build ./src/EDSMTriangulation.sln --no-restore
