@@ -17,6 +17,8 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
+    - name: Install workloads
+      run: dotnet workload restore /.src/
     - name: Restore dependencies
       run: dotnet restore ./src/
     - name: Build
