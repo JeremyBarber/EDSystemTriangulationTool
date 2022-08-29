@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Setup .NET 6
         uses: actions/setup-dotnet@v1
@@ -37,8 +39,24 @@ jobs:
       - name: Restore Dependencies
         run: dotnet restore src/EDSMTriangulation.sln
 
+      - name: Calculate Version String
+        id: version
+        uses: paulhatch/semantic-version@v4.0.2
+        with:
+          tag_prefix: "v"
+          major_pattern: "(MAJOR)"
+          minor_pattern: "(MINOR)"
+          format: "${major}.${minor}.${patch}-prerelease${increment}"
+          bump_each_commit: false
+          
+      - name: What Version Was That?
+        run: echo ${{ steps.version.outputs.version}}
+          
       - name: Build MAUI Windows
-        run: dotnet build -c Release -f net6.0-windows10.0.19041.0 .\src\EDSMTriangulation.sln
+        run: dotnet build -c Release -f net6.0-windows10.0.19041.0 --no-restore .\src\EDSMTriangulation.sln
+        
+      - name: Publish MAUI Windows
+        run: dotnet publish -c Release -f net6.0-windows10.0.19041.0 --no-build .\src\EDSMTriangulation.sln
 
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v2.3.1
