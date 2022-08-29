@@ -30,6 +30,18 @@
                Grid.Column="1"
                Source="normal_map.png" />
 
+        <Image Grid.Row="1"
+               Grid.Column="0"
+               x:Name="sourceListSpinner"
+               IsVisible="false"
+               Source="ed_spinnner.gif"
+               IsAnimationPlaying="true" />
+        <Image Grid.Row="1"
+               Grid.Column="1"
+               x:Name="targetListSpinner"
+               IsVisible="false"
+               Source="ed_spinnner.gif"
+               IsAnimationPlaying="true" />
         <Image Grid.Row="2"
                Grid.Column="0"
                x:Name="addSourceSpinner"
@@ -68,6 +80,7 @@
                        Style="{StaticResource PrimaryLabel}" />
                 <ListView Grid.Row="1"
                           ItemsSource="{Binding Sources}"
+                          ItemSelected="OnSourceSelected"
                           x:Name="sourcesListView">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -91,17 +104,17 @@
                                            Text="{Binding minRadius}"
                                            VerticalOptions="Center"
                                            HorizontalOptions="End"
-                                           Style="{StaticResource ListLabel}" />
+                                           Style="{StaticResource SecondaryLabel}" />
                                     <Label Grid.Column="2"
                                            Text="-"
                                            VerticalOptions="Center"
                                            HorizontalOptions="Center"
-                                           Style="{StaticResource ListLabel}" />
+                                           Style="{StaticResource SecondaryLabel}" />
                                     <Label Grid.Column="3"
                                            Text="{Binding radius}"
                                            VerticalOptions="Center"
                                            HorizontalOptions="Start"
-                                           Style="{StaticResource ListLabel}" />
+                                           Style="{StaticResource SecondaryLabel}" />
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
@@ -134,7 +147,7 @@
                         <DataTemplate>
                             <ViewCell>
                                 <Label Text="{Binding Name}"
-                                       Style="{StaticResource ListLabel}" />
+                                       Style="{StaticResource SecondaryLabel}" />
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -164,18 +177,10 @@
                        VerticalTextAlignment="Start"
                        Style="{StaticResource PrimaryLabel}" />
 
-                <!--<Button Grid.Column="1"
-                    Grid.Row="0"
-                    x:Name="removeButton"
-                    Text="Remove"
-                    Clicked="OnRemoveButtonClicked"
-                    HorizontalOptions="Center" />-->
-
-                <Editor Grid.Row="1"
-                        x:Name="systemNameEditor"
-                        Placeholder="Enter your System Name here"
-                        HeightRequest="50"
-                        Style="{StaticResource PrimaryEditor}"/>
+                <Entry Grid.Row="1"
+                       x:Name="systemNameInput"
+                       Placeholder="Enter your System Name here"
+                       Style="{StaticResource PrimaryEntry}"/>
 
                 <Label Grid.Row="2"
                        x:Name="minDistanceLabel"
@@ -241,7 +246,7 @@
                         <DataTemplate>
                             <ViewCell>
                                 <Label Text="{Binding Name}"
-                                       Style="{StaticResource ListLabel}" />
+                                       Style="{StaticResource SecondaryLabel}" />
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>

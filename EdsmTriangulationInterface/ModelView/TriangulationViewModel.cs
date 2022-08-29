@@ -29,7 +29,7 @@ namespace ListViewDemos.ViewModels
             get => new(_targetDetailsCollection.Select(x => new TargetDetailsViewModel(x)));
         }
 
-         public int SourcesCount
+        public int SourcesCount
         {
             get => Sources.Count;
         }
@@ -64,16 +64,30 @@ namespace ListViewDemos.ViewModels
             }
         }
 
+        public async Task TryRemoveSelectedSource(SourceViewModel source)
+        {
+            await _model.RemoveSource(source.systemName, source.minRadius, source.radius);
+
+            SyncSources();
+        }
+
         public async Task RemoveMostRecentSource()
         {
-            await _model.DeleteLastSource();
+            await _model.RemoveLastSource();
 
             SyncSources();
         }
 
         public async Task SetTargetDetails(string name)
         {
-            _targetDetailsCollection = (await _model.GetTargetDetails(name)).bodies;
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                _targetDetailsCollection.Clear();
+            }
+            else
+            {
+                _targetDetailsCollection = (await _model.GetTargetDetails(name)).bodies;
+            }
 
             SyncSources();
         }

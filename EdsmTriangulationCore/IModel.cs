@@ -9,7 +9,8 @@ namespace EDSMTriangulationCore.Services
 
         Task<bool> CheckSourceExists(string systemName);
         Task AddSource(string systemName, int min, int max);
-        Task DeleteLastSource();
+        Task RemoveSource(string systemName, int min, int max);
+        Task RemoveLastSource();
         Task<BodiesResponse> GetTargetDetails(string name);
     }
 }

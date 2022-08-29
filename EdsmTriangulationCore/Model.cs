@@ -38,7 +38,16 @@ namespace EDSMTriangulationCore.Services
             await UpdateTriangulation();
         }
 
-        public async Task DeleteLastSource()
+        public async Task RemoveSource(string systemName, int min, int max)
+        {
+            var currentRequest = new SphereSystemsRequest(systemName, minRadius: min, radius: max);
+
+            Sources.RemoveWhere(x => currentRequest.systemName == x.systemName && currentRequest.minRadius == x.minRadius && currentRequest.radius == x.radius);
+
+            await UpdateTriangulation();
+        }
+
+        public async Task RemoveLastSource()
         {
             if (!Sources.Any())
             {

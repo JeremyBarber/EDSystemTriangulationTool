@@ -12,3 +12,8 @@ fix the generic enum writer to rehydrate all the removed symbols
 
 Readme
 Documentation
+
+
+
+
+help text

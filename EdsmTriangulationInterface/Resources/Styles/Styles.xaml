@@ -33,11 +33,13 @@
         <Setter Property="Padding" Value="10"/>
     </Style>
 
-    <Style x:Key="PrimaryEditor"  
-           TargetType="Editor">
+    <Style x:Key="PrimaryEntry"
+           TargetType="Entry">
         <Setter Property="TextColor" Value="{StaticResource Background}" />
         <Setter Property="BackgroundColor" Value="{StaticResource Foreground}" />
         <Setter Property="PlaceholderColor" Value="{StaticResource Secondary}" />
+        <Setter Property="IsTextPredictionEnabled" Value="false" />
+        <Setter Property="HeightRequest" Value="30" />
         <Setter Property="FontFamily" Value="EuroCaps"/>
         <Setter Property="FontSize" Value="14"/>
     </Style>
@@ -73,11 +75,8 @@
         <Setter Property="Padding" Value="10"/>
     </Style>
 
-    <Style x:Key="ListLabel"  
-           TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource Primary}" />
-        <Setter Property="FontFamily" Value="EuroCaps"/>
-        <Setter Property="FontSize" Value="12"/>
+    <Style TargetType="ListView">
+        <Setter Property="RowHeight" Value="50" />
     </Style>
 
     <Style TargetType="Slider">

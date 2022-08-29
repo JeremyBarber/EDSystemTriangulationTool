@@ -6,7 +6,7 @@ namespace EdsmTriangulationInterface
 {
     public partial class MainPage : ContentPage
     {
-        private readonly TriangulationViewModel viewModel = new TriangulationViewModel();
+        private readonly TriangulationViewModel viewModel = new();
 
         public MainPage()
         {
@@ -19,18 +19,35 @@ namespace EdsmTriangulationInterface
             ToggleSourcesWaiting(true);
             await RunWithErrorHandling(new Func<Task>(async () =>
             {
-                await viewModel.TryAddNewSource(systemNameEditor.Text, (int)minDistanceSlider.Value, (int)maxDistanceSlider.Value);
-                systemNameEditor.Text = string.Empty;
+                var previousSelectedTarget = (TargetViewModel)targetsListView.SelectedItem;
+                await viewModel.TryAddNewSource(systemNameInput.Text, (int)minDistanceSlider.Value, (int)maxDistanceSlider.Value);
+                if (!viewModel.Targets.Contains(previousSelectedTarget))
+                {
+                    await viewModel.SetTargetDetails(string.Empty);
+                }
+                systemNameInput.Text = string.Empty;
             }));
             ToggleSourcesWaiting(false);
         }
 
-        public async void OnRemoveButtonClicked(object sender, EventArgs e)
+        public async void OnSourceSelected(object sender, SelectedItemChangedEventArgs args)
         {
+            var selectedSource = ((SourceViewModel)args.SelectedItem);
+            if (!await DisplayAlert("Would you like to remove the selected source?", $"{selectedSource.systemName} ({selectedSource.minRadius}-{selectedSource.radius})", "Delete", "Cancel"))
+            {
+                return;
+            }
+
             ToggleSourcesWaiting(true);
             await RunWithErrorHandling(new Func<Task>(async () =>
-            {
-                await viewModel.RemoveMostRecentSource();
+            {        
+                await viewModel.TryRemoveSelectedSource(selectedSource);
+
+                if (!viewModel.Sources.Any())
+                {
+                    await viewModel.SetTargetDetails(string.Empty);
+                }
+
             }));
             ToggleSourcesWaiting(false);
         }
@@ -68,8 +85,17 @@ namespace EdsmTriangulationInterface
 
         public async void OnAboutButtonClicked(object sender, EventArgs e)
         {
-            await DisplayAlert("About", $"A silly little program thrown together.{Environment.NewLine}" +
-                $"If you're feeling generous, and it hasn't crashed too much, you can support the author here", "Close");
+            var helpText = new List<string>
+            {
+                "A little tool that I hope was useful",
+                "",
+                "Bug Reports",
+                "https://github.com/JeremyBarber/EDSystemTriangulationTool/issues",
+                "",
+                "Good luck out there CMDR"
+            };
+
+            await DisplayAlert("About", string.Join(Environment.NewLine, helpText), "Close");
         }
 
         private async Task RunWithErrorHandling(Func<Task> command)
@@ -91,15 +117,15 @@ namespace EdsmTriangulationInterface
         private void ToggleSourcesWaiting(bool isWaiting)
         {
             addButton.IsVisible = !isWaiting;
-            //removeButton.IsVisible = !isWaiting;
-            systemNameEditor.IsVisible = !isWaiting;
+            systemNameInput.IsVisible = !isWaiting;
             minDistanceSlider.IsVisible = !isWaiting;
             minDistanceLabel.IsVisible = !isWaiting;
             maxDistanceSlider.IsVisible = !isWaiting;
             maxDistanceLabel.IsVisible = !isWaiting;
 
-            sourcesListView.IsEnabled = !isWaiting;
+            sourcesListView.IsVisible = !isWaiting;
 
+            sourceListSpinner.IsVisible = isWaiting;
             addSourceSpinner.IsVisible = isWaiting;
 
             ToggleTargetsWaiting(isWaiting);
@@ -107,8 +133,10 @@ namespace EdsmTriangulationInterface
 
         private void ToggleTargetsWaiting(bool isWaiting)
         {
-            targetsListView.IsEnabled = !isWaiting;
+            targetsListView.IsVisible = !isWaiting;
+            targetListView.IsVisible = !isWaiting;
 
+            targetListSpinner.IsVisible = isWaiting;
             targetDetailsSpinner.IsVisible = isWaiting;
         }
     }
