@@ -4,6 +4,7 @@ using EDSMTriangulationCore.Services;
 using EdsmTriangulationInterface.ModelView;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace ListViewDemos.ViewModels
@@ -38,6 +39,10 @@ namespace ListViewDemos.ViewModels
             get => Targets.Count;
         }
 
+        public string Version
+        {
+            get => Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        }
 
         public TriangulationViewModel()
         {

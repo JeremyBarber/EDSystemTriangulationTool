@@ -9,6 +9,7 @@ namespace Edsm.Sdk.Model.Edsm.Enums.Planets
         WaterGeysers,
         MajorWaterGeysers,
         MinorCarbonDioxideGeysers,
-        CarbonDioxideGeysers
+        CarbonDioxideGeysers,
+        MajorRockyMagma
     }
 }

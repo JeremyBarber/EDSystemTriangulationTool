@@ -1,222 +1,268 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EdsmTriangulationInterface.MainPage">
+             x:Class="EdsmTriangulationInterface.MainPage"
+             BackgroundColor="{StaticResource Background}"
+             Title="">
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="20*" />
+            <RowDefinition Height="10*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="4*" />
-            <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+        <Image Grid.Row="1"
+               Grid.Column="0"
+               Source="galaxy_map.png" />
+        <Image Grid.Row="1"
+               Grid.Column="1"
+               Source="realistic_galaxy_map.png" />
         <Image Grid.Row="2"
                Grid.Column="0"
-               Source="orrery_map.png"
-               BackgroundColor="Aquamarine" />
+               Source="planetary_data_unknown_mission.png" />
         <Image Grid.Row="2"
                Grid.Column="1"
-               Source="orrery_map.png" />
-        <Image Grid.Row="3"
-               Grid.Column="1"
-               Source="ed_spinner_other.gif"
-               IsAnimationPlaying="true"/>
+               Source="normal_map.png" />
 
-        <Label Grid.ColumnSpan="2"
-               Text="Greetings CMDR, welcome to the Elite Dangerous System Triangulation Tool"
-               HorizontalOptions="Center"
-               VerticalOptions="Center" />
-
-        <Label x:Name="sourceCountLabel"
-               Grid.Row="1"
+        <Image Grid.Row="2"
                Grid.Column="0"
-               Text="{Binding SourcesCount, StringFormat='Sources - [{0:F0} Systems]'}"
-               HorizontalOptions="Center"
-               VerticalOptions="Center" />
-        <Label x:Name="targetCountLabel"
-               Grid.Row="1"
+               x:Name="addSourceSpinner"
+               IsVisible="false"
+               Source="ed_spinnner.gif"
+               IsAnimationPlaying="true" />
+        <Image Grid.Row="2"
                Grid.Column="1"
-               Text="{Binding TargetsCount, StringFormat='Targets - [{0:F0} Systems]'}"
+               x:Name="targetDetailsSpinner"
+               IsVisible="false"
+               Source="ed_spinnner.gif"
+               IsAnimationPlaying="true" />
+
+        <Label Grid.Row="0"
+               Grid.ColumnSpan="2"
+               Text="Elite Dangerous System Triangulation Tool"
                HorizontalOptions="Center"
-               VerticalOptions="Center" />
+               VerticalOptions="Center"
+               Style="{StaticResource PrimaryLabel}" />
 
-        <ListView ItemsSource="{Binding Sources}"
-                  Grid.Row="2"
-                  Grid.Column="0"
-                  x:Name="sourcesListView">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid Padding="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Image Grid.Row="0"
-                                   Grid.Column="0"
-                                   Grid.RowSpan="2"
-                                   Source="orrery_map.png"
-                                   Aspect="AspectFill"
-                                   HeightRequest="60"
-                                   WidthRequest="60" />
-                            <Label Grid.Row="0"
-                                   Grid.Column="1"
-                                   Grid.ColumnSpan="2"
-                                   Text="{Binding systemName}"
-                                   FontAttributes="Bold" />
-                            <Label Grid.Row="1"
-                                   Grid.Column="1"
-                                   Text="{Binding minRadius}"
-                                   FontAttributes="Italic"
-                                   VerticalOptions="End" />
-                            <Label Grid.Row="1"
-                                   Grid.Column="2"
-                                   Text="{Binding radius}"
-                                   FontAttributes="Italic"
-                                   VerticalOptions="End" />
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <ListView ItemsSource="{Binding Targets}"
-                  ItemSelected="OnTargetSelected"
-                  Grid.Row="2"
-                  Grid.Column="1"
-                  x:Name="targetsListView"
-                  SeparatorVisibility="Default"
-                  VerticalScrollBarVisibility="Always">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Label Text="{Binding Name}"
-                               FontAttributes="Bold" />
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Border Grid.Row="1"
+                Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="10*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Text="{Binding SourcesCount, StringFormat='Sources - {0:F0}'}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Style="{StaticResource PrimaryLabel}" />
+                <ListView Grid.Row="1"
+                          ItemsSource="{Binding Sources}"
+                          x:Name="sourcesListView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="10*" />
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="2*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0"
+                                           Text="{Binding systemName}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start"
+                                           Style="{StaticResource SecondaryLabel}" />
+                                    <Label Grid.Column="1"
+                                           Text="{Binding minRadius}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="End"
+                                           Style="{StaticResource ListLabel}" />
+                                    <Label Grid.Column="2"
+                                           Text="-"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"
+                                           Style="{StaticResource ListLabel}" />
+                                    <Label Grid.Column="3"
+                                           Text="{Binding radius}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start"
+                                           Style="{StaticResource ListLabel}" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Border>
+        <Border Grid.Row="1"
+                Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="10*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0"
+                       Text="{Binding TargetsCount, StringFormat='Targets - {0:F0}'}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Style="{StaticResource PrimaryLabel}" />
+                <ListView Grid.Row="1"
+                          ItemsSource="{Binding Targets}"
+                          ItemSelected="OnTargetSelected"
+                          x:Name="targetsListView"
+                          SeparatorVisibility="Default"
+                          VerticalScrollBarVisibility="Always">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Label Text="{Binding Name}"
+                                       Style="{StaticResource ListLabel}" />
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Border>
 
-        <Grid Grid.Row="3"
-              Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Image Grid.Row="0"
-                   Grid.Column="0"
-                   Grid.RowSpan="4"
-                   Grid.ColumnSpan="2"
-                   x:Name="addSourceSpinner"
-                   IsVisible="false"
-                   Source="ed_spinnner_other.gif"
-                   IsAnimationPlaying="true"/>
+        <Border Grid.Row="2"
+                Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0"
-                    Grid.Row="0"
-                    x:Name="addButton"
-                    Text="Add"
-                    Clicked="OnAddButtonClicked"
-                    HorizontalOptions="Center" />
-            <Button Grid.Column="1"
+                <Label Grid.Row="0"
+                       Text="Add new source"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Start"
+                       Style="{StaticResource PrimaryLabel}" />
+
+                <!--<Button Grid.Column="1"
                     Grid.Row="0"
                     x:Name="removeButton"
                     Text="Remove"
                     Clicked="OnRemoveButtonClicked"
-                    HorizontalOptions="Center" />
+                    HorizontalOptions="Center" />-->
 
-            <Editor Grid.ColumnSpan="2"
-                    Grid.Column="0"
-                    Grid.Row="1"
-                    x:Name="systemNameEditor"
-                    Placeholder="Enter your System Name here"
-                    HeightRequest="50" />
+                <Editor Grid.Row="1"
+                        x:Name="systemNameEditor"
+                        Placeholder="Enter your System Name here"
+                        HeightRequest="50"
+                        Style="{StaticResource PrimaryEditor}"/>
 
-            <Stepper Grid.Column="0"
-                     Grid.Row="2"
-                     x:Name="minDistanceStepper"
-                     Minimum="0"
-                     Value="0"
-                     Maximum="100"
-                     Increment="1"
-                     ValueChanged="OnMinDistanceValueChanged"
-                     HorizontalOptions="CenterAndExpand" />
+                <Label Grid.Row="2"
+                       x:Name="minDistanceLabel"
+                       Text="{Binding Source={x:Reference minDistanceSlider}, Path=Value, StringFormat='Minimum Radius - {0:F0}'}"
+                       VerticalOptions="End"
+                       HorizontalOptions="Center"
+                       Style="{StaticResource SecondaryLabel}" />
 
-            <Label x:Name="minDistanceLabel"
-                   Grid.Column="1"
-                   Grid.Row="2"
-                   Text="{Binding Source={x:Reference minDistanceStepper}, Path=Value, StringFormat='Minimum Radius - {0:F0}'}"
-                   VerticalOptions="CenterAndExpand" />
+                <Slider Grid.Row="3"
+                        x:Name="minDistanceSlider"
+                        Minimum="0"
+                        Value="0"
+                        Maximum="100"
+                        ValueChanged="OnMinDistanceValueChanged"
+                        VerticalOptions="Start" />
 
-            <Stepper Grid.Column="0"
-                     Grid.Row="3"
-                     x:Name="maxDistanceStepper"
-                     Minimum="0"
-                     Value="100"
-                     Maximum="100"
-                     Increment="1"
-                     ValueChanged="OnMaxDistanceValueChanged"
-                     HorizontalOptions="CenterAndExpand" />
+                <Label Grid.Row="4"
+                       x:Name="maxDistanceLabel"
+                       Text="{Binding Source={x:Reference maxDistanceSlider}, Path=Value, StringFormat='Maximum Radius - {0:F0}'}"
+                       VerticalOptions="End"
+                       HorizontalOptions="Center"
+                       Style="{StaticResource SecondaryLabel}" />
 
-            <Label x:Name="maxDistanceLabel"
-                   Grid.Column="1"
-                   Grid.Row="3"
-                   Text="{Binding Source={x:Reference maxDistanceStepper}, Path=Value, StringFormat='Maximum Radius - {0:F0}'}"
-                   VerticalOptions="CenterAndExpand"  />
-        </Grid>
+                <Slider Grid.Row="5"
+                        x:Name="maxDistanceSlider"
+                        Minimum="0"
+                        Value="100"
+                        Maximum="100"
+                        ValueChanged="OnMaxDistanceValueChanged"
+                        VerticalOptions="Start" />
 
-        <Grid Grid.Row="3"
-              Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="3*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Image Grid.Row="0"
-                   Grid.Column="0"
-                   Grid.RowSpan="4"
-                   Grid.ColumnSpan="2"
-                   x:Name="targetDetailsSpinner"
-                   IsVisible="false"
-                   Source="ed_spinnner_other.gif"
-                   IsAnimationPlaying="true"/>
-            <Label Grid.Row="0"
-                   Grid.Column="1"
-                   Text="{Binding Source={x:Reference targetsListView}, Path=SelectedItem.Name, StringFormat='Showing all system bodies in - {0:F0}'}" />
-            <ListView ItemsSource="{Binding TargetDetails}"
-                      Grid.Row="1"
-                      Grid.Column="0"
-                      Grid.ColumnSpan="2"
-                      x:Name="targetListView"
-                      SeparatorVisibility="Default"
-                      VerticalScrollBarVisibility="Always">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Label Text="{Binding Name}"
-                                   FontAttributes="Bold" />
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
+                <Button Grid.Row="6"
+                        x:Name="addButton"
+                        Text="Confirm"
+                        Clicked="OnAddButtonClicked"
+                        HorizontalOptions="Fill"
+                        Style="{StaticResource PrimaryButton}" />
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="2"
+                Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="6*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0"
+                       Text="Target Bodies"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Start"
+                       Style="{StaticResource PrimaryLabel}" />
+                <ListView ItemsSource="{Binding TargetDetails}"
+                          Grid.Row="1"
+                          x:Name="targetListView"
+                          SeparatorVisibility="Default"
+                          SelectionMode="None"
+                          VerticalScrollBarVisibility="Always">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Label Text="{Binding Name}"
+                                       Style="{StaticResource ListLabel}" />
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Border>
+
+        <Button Grid.Row="3"
+                Grid.Column="0"
+                Text="About"
+                Clicked="OnAboutButtonClicked"
+                HorizontalOptions="Start"
+                VerticalOptions="Center"
+                Style="{StaticResource SecondaryButton}" />
+
+        <Label Grid.Row="3"
+               Grid.Column="1"
+               Text="{Binding Version, StringFormat='Version: {0:F0}'}"
+               HorizontalOptions="End"
+               VerticalOptions="Center"
+               Style="{StaticResource TertiaryLabel}"/>
 
     </Grid>
 

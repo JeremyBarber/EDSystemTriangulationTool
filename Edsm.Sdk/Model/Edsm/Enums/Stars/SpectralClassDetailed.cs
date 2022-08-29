@@ -10,6 +10,8 @@ namespace Edsm.Sdk.Model.Edsm.Enums.Stars
     [JsonConverter(typeof(StandardEnumConverter<SpectralClassDetailed>))]
     public enum SpectralClassDetailed
     {
+       F3,
+       G2,
        K7,
        M1
     }
