@@ -95,6 +95,7 @@ jobs:
           echo ${{steps.download.outputs.download-path}}
           ls ${{steps.download.outputs.download-path}}
           ls ${{steps.download.outputs.download-path}}/windows-ui
+          tree ${{steps.download.outputs.download-path}}/windows-ui
 
       - name: Construct Release
         uses: actions/create-release@v1
@@ -108,6 +109,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ${{steps.download.outputs.download-path}}/windows-ui/EdsmTriangulationInterface_${{needs.construct-version.outputs.version}}_x64.msix
+          asset_path: ${{steps.download.outputs.download-path}}/windows-ui/**/EdsmTriangulationInterface_${{needs.construct-version.outputs.version}}_x64.msix
           asset_name: EdsmTriangulationInterface_${{needs.construct-version.outputs.version}}_x64.msix
           asset_content_type: application/zip
