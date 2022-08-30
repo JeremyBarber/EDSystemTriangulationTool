@@ -103,6 +103,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: EdsmTriangulationInterface_${{needs.construct-version.outputs.version}}.0_x64.msix
+          asset_path: ./EDSystemTriangulationTool/windows-ui/EdsmTriangulationInterface_${{needs.construct-version.outputs.version}}.0_x64.msix
           asset_name: EdsmTriangulationInterface_${{needs.construct-version.outputs.version}}.0_x64.msix
-          asset_content_type: msix
+          asset_content_type: application/zip
