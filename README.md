@@ -30,6 +30,6 @@ This app is built in .NET 6.0 and the UI is using the .NET MAUI multi-platform U
 
 Use the Issues tab above to raise issues and feature requests.
 
-### [License](LICENSE)
+### [License](LICENSE.md)
 
 ### [Changelog](CHANGELOG.md)

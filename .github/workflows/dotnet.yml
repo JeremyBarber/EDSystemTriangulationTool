@@ -1,4 +1,4 @@
-name: .NET
+name: Release
 
 on:
   push:
@@ -16,6 +16,8 @@ jobs:
     name: Construct Version
     outputs:
       version: ${{ steps.version.outputs.version }}
+      changelog: ${{ steps.changelog.outputs.changes }}
+      tag: ${{ steps.changelog.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -31,6 +33,14 @@ jobs:
           minor_pattern: "(MINOR)"
           format: "${major}.${minor}.${patch}"
           bump_each_commit: false
+    
+      - name: Get Changelog Entry
+        id: changelog
+        uses: mindsers/changelog-reader-action@v2
+        with:
+          validation_level: warn
+          version: ${{ steps.version.outputs.version }}
+          path: ./CHANGELOG.md
           
   build-windows-ui:
     runs-on: windows-2022
@@ -86,8 +96,8 @@ jobs:
         id: create-release
         with:
           release_name: ${{needs.construct-version.outputs.version}}
-          tag_name: ${{needs.construct-version.outputs.version}}
-          body_path: CHANGELOG.md
+          tag_name: ${{needs.construct-version.outputs.tag}}
+          body: ${{needs.construct-version.outputs.changelog}}
           
       - name: Upload Release
         uses: actions/upload-release-asset@v1
