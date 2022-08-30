@@ -60,4 +60,4 @@ jobs:
         uses: actions/upload-artifact@v2.3.1
         with:
           name: windows-ui
-          path: src/MauiBeach/bin/Release/net6.0-windows*/**/EdsmTriangulationInterface*.msix
+          path: src/EdsmTriangulationInterface/bin/Release/net6.0-windows*/**/EdsmTriangulationInterface*.msix
