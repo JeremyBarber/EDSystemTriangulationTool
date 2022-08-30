@@ -3,18 +3,39 @@ name: .NET
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
     
 env:
   DOTNET_NOLOGO: true                     # Disable the .NET logo
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true # Disable the .NET first time experience
   DOTNET_CLI_TELEMETRY_OPTOUT: true       # Disable sending .NET CLI telemetry
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  build-windows:
+  construct-version:
     runs-on: windows-2022
-    name: Windows Build
+    name: Construct Version
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          
+      - name: Calculate Version String
+        id: version
+        uses: paulhatch/semantic-version@v4.0.2
+        with:
+          tag_prefix: "v"
+          major_pattern: "(MAJOR)"
+          minor_pattern: "(MINOR)"
+          format: "${major}.${minor}.${patch}"
+          bump_each_commit: false
+          
+  build-windows-ui:
+    runs-on: windows-2022
+    needs: construct-version
+    name: Windows Build UI
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -38,26 +59,40 @@ jobs:
 
       - name: Restore Dependencies
         run: dotnet restore src/EDSMTriangulation.sln
-
-      - name: Calculate Version String
-        id: version
-        uses: paulhatch/semantic-version@v4.0.2
-        with:
-          tag_prefix: "v"
-          major_pattern: "(MAJOR)"
-          minor_pattern: "(MINOR)"
-          format: "${major}.${minor}.${patch}"
-          bump_each_commit: false
         
         # Currently a bug in MAUI building means that using --no-restore and --no-build can cause build failures
       - name: Build MAUI Windows
-        run: dotnet build -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{steps.version.outputs.version}} .\src\EDSMTriangulation.sln
+        run: dotnet build -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{needs.construct-version.outputs.version}} .\src\EDSMTriangulation.sln
         
       - name: Publish MAUI Windows
-        run: dotnet publish -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{steps.version.outputs.version}} .\src\EDSMTriangulation.sln
+        run: dotnet publish -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{needs.construct-version.outputs.version}} .\src\EDSMTriangulation.sln
 
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v2.3.1
         with:
           name: windows-ui
           path: src/EdsmTriangulationInterface/bin/Release/net6.0-windows*/**/EdsmTriangulationInterface*.msix
+  
+  publish-release:
+    runs-on: windows-2022
+    needs: [construct-version, build-windows-ui]
+    name: Publish Release
+    steps:
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v3
+
+      - name: Construct Release
+        uses: actions/create-release@v1
+        id: create-release
+        with:
+          release_name: ${{needs.construct-version.outputs.version}}
+          tag_name: ${{needs.construct-version.outputs.version}}
+          body_path: CHANGELOG.md
+          
+      - name: Upload Release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: EdsmTriangulationInterface_${{needs.construct-version.outputs.version}}.0_x64.msix
+          asset_name: EdsmTriangulationInterface_${{needs.construct-version.outputs.version}}.0_x64.msix
+          asset_content_type: msix
