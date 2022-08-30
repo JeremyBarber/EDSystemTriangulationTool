@@ -1,3 +1,7 @@
+![GitHub Version](https://img.shields.io/github/v/release/JeremyBarber/EDSystemTriangulationTool??display_name=tag&include_prereleases&sort=semver&color=cf7500&style=for-the-badge)
+![GitHub License](https://img.shields.io/github/license/JeremyBarber/EDSystemTriangulationTool?color=cf7500&style=for-the-badge)
+![GitHub Downloads](https://img.shields.io/github/downloads/JeremyBarber/EDSystemTriangulationTool/total?color=cf7500&style=for-the-badge)
+
 # Elite Dangerous Triangulation Tool
 
 ## What Is This?
@@ -12,11 +16,9 @@ When you have narrowed the list of targets down enough, you can select a target 
 
 ## Releases
 
+### [Latest Release](https://github.com/JeremyBarber/EDSystemTriangulationTool/releases)
+
 The progam is available as a UI for Windows, IOS, and Android as well as a Command Line tool for those of you feeling a little old school
-
-### UI
-
-[![UI Windows](https://github.com/JeremyBarber/EDSystemTriangulationTool/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JeremyBarber/EDSystemTriangulationTool/actions/workflows/dotnet.yml) **Windows** 
 
 ## Dependencies and Credits
 
