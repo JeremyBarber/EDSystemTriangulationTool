@@ -40,10 +40,10 @@ jobs:
           validation_level: warn
           path: ./CHANGELOG.md
           
-  build-windows-ui:
+  windows-ui-build:
     runs-on: windows-2022
     needs: construct-version
-    name: Windows Build UI
+    name: Windows UI Build
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -101,6 +101,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ./EDSystemTriangulationTool/windows-ui/EdsmTriangulationInterface_${{needs.construct-version.outputs.version}}_x64.msix
+          asset_path: ./windows-ui/EdsmTriangulationInterface_${{needs.construct-version.outputs.version}}_x64.msix
           asset_name: EdsmTriangulationInterface_${{needs.construct-version.outputs.version}}_x64.msix
           asset_content_type: application/zip
