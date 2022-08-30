@@ -56,10 +56,10 @@ jobs:
           dotnet-version: 6.0.x
           include-prerelease: true
 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1.1
-        with:
-          vs-prerelease: true
+      # - name: Setup MSBuild
+      #   uses: microsoft/setup-msbuild@v1.1
+      #   with:
+      #     vs-prerelease: true
 
       - name: Install MAUI Workloads
         run: |
@@ -67,13 +67,22 @@ jobs:
 
       - name: Restore Dependencies
         run: dotnet restore src/EDSMTriangulation.sln
+
+      - name: Add Signing Certificate To Store
+        shell: pwsh
+        run: |
+          $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.PUBLISHING_BASE64 }}")
+          $currentDirectory = Get-Location
+          $certificatePath = Join-Path -Path $currentDirectory -ChildPath "MyCertificate.pfx"
+          [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
+          Import-PfxCertificate -FilePath $certificatePath -CertStoreLocation Cert:\LocalMachine\My -Password ${{secrets.PUBLISHING_PASSWORD}}           
         
         # Currently a bug in MAUI building means that using --no-restore and --no-build can cause build failures
       - name: Build MAUI Windows
         run: dotnet build -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{needs.construct-version.outputs.version}} .\src\EDSMTriangulation.sln
         
       - name: Publish MAUI Windows
-        run: dotnet publish -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{needs.construct-version.outputs.version}} .\src\EDSMTriangulation.sln
+        run: dotnet publish -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{needs.construct-version.outputs.version}} /p:PackageCertificateThumbprint=${{secrets.PUBLISHING_THUMBPRINT}} .\src\EDSMTriangulation.sln
 
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v2.3.1
