@@ -83,7 +83,7 @@ jobs:
   
   publish-release:
     runs-on: windows-2022
-    needs: [construct-version, build-windows-ui]
+    needs: [construct-version, windows-ui-build]
     name: Publish Release
     steps:
       - name: Download All Artifacts
