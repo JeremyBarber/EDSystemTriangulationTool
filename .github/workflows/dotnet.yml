@@ -95,8 +95,8 @@ jobs:
         uses: actions/create-release@v1
         id: create-release
         with:
-          release_name: ${{needs.construct-version.outputs.version}}
-          tag_name: ${{needs.construct-version.outputs.tag}}
+          release_name: v${{needs.construct-version.outputs.version}}
+          tag_name: v${{needs.construct-version.outputs.tag}}
           body: ${{needs.construct-version.outputs.changelog}}
           
       - name: Upload Release
