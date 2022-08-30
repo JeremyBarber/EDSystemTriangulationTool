@@ -94,6 +94,7 @@ jobs:
         run: |
           echo ${{steps.download.outputs.download-path}}
           ls ${{steps.download.outputs.download-path}}
+          ls ${{steps.download.outputs.download-path}}/windows-ui
 
       - name: Construct Release
         uses: actions/create-release@v1
