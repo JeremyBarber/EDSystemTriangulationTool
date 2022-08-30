@@ -48,12 +48,13 @@ jobs:
           minor_pattern: "(MINOR)"
           format: "${major}.${minor}.${patch}"
           bump_each_commit: false
-          
+        
+        # Currently a bug in MAUI building means that using --no-restore and --no-build can cause build failures
       - name: Build MAUI Windows
-        run: dotnet build -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{steps.version.outputs.version}} --no-restore .\src\EDSMTriangulation.sln
+        run: dotnet build -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{steps.version.outputs.version}} .\src\EDSMTriangulation.sln
         
       - name: Publish MAUI Windows
-        run: dotnet publish -c Release -f net6.0-windows10.0.19041.0 --no-build .\src\EDSMTriangulation.sln
+        run: dotnet publish -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{steps.version.outputs.version}} .\src\EDSMTriangulation.sln
 
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v2.3.1
