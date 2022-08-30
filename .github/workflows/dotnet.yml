@@ -50,7 +50,7 @@ jobs:
           bump_each_commit: false
           
       - name: Build MAUI Windows
-        run: dotnet build -c Release -f net6.0-windows10.0.19041.0 /p:AssemblyVersion=${{steps.version.outputs.version}} --no-restore .\src\EDSMTriangulation.sln
+        run: dotnet build -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{steps.version.outputs.version}} --no-restore .\src\EDSMTriangulation.sln
         
       - name: Publish MAUI Windows
         run: dotnet publish -c Release -f net6.0-windows10.0.19041.0 --no-build .\src\EDSMTriangulation.sln
@@ -58,5 +58,5 @@ jobs:
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v2.3.1
         with:
-          name: windows-ci-build
-          path: src/MauiBeach/bin/Release/net6.0-windows*/**/MauiBeach*.msix
+          name: windows-ui
+          path: src/MauiBeach/bin/Release/net6.0-windows*/**/EdsmTriangulationInterface*.msix
