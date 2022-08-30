@@ -71,11 +71,12 @@ jobs:
       - name: Add Signing Certificate To Store
         shell: pwsh
         run: |
+          $password = ConvertTo-SecureString -String JeremyBarberCertificatePassword -Force -AsPlainText
           $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.PUBLISHING_BASE64 }}")
           $currentDirectory = Get-Location
           $certificatePath = Join-Path -Path $currentDirectory -ChildPath "MyCertificate.pfx"
           [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
-          Import-PfxCertificate -FilePath $certificatePath -CertStoreLocation Cert:\LocalMachine\My -Password ${{secrets.PUBLISHING_PASSWORD}}           
+          Import-PfxCertificate -FilePath $certificatePath -CertStoreLocation Cert:\LocalMachine\My -Password $password           
         
         # Currently a bug in MAUI building means that using --no-restore and --no-build can cause build failures
       - name: Build MAUI Windows
