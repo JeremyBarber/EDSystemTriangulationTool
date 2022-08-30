@@ -16,8 +16,8 @@ jobs:
     name: Construct Version
     outputs:
       version: ${{ steps.version.outputs.version }}
-      changelog: ${{ steps.changelog.outputs.changes }}
-      tag: ${{ steps.changelog.outputs.version }}
+      changelog-version: ${{ steps.changelog.outputs.version }}
+      changelog-statement: ${{ steps.changelog.outputs.changes }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -31,7 +31,7 @@ jobs:
           tag_prefix: "v"
           major_pattern: "(MAJOR)"
           minor_pattern: "(MINOR)"
-          format: "${major}.${minor}.${patch}"
+          format: "${major}.${minor}.${patch}.${increment}"
           bump_each_commit: false
     
       - name: Get Changelog Entry
@@ -96,12 +96,12 @@ jobs:
         with:
           release_name: v${{needs.construct-version.outputs.version}}
           tag_name: v${{needs.construct-version.outputs.tag}}
-          body: ${{needs.construct-version.outputs.changelog}}
+          body: ${{needs.construct-version.outputs.changelog-statement}}
           
       - name: Upload Release
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ./EDSystemTriangulationTool/windows-ui/EdsmTriangulationInterface_${{needs.construct-version.outputs.version}}.0_x64.msix
-          asset_name: EdsmTriangulationInterface_${{needs.construct-version.outputs.version}}.0_x64.msix
+          asset_path: ./EDSystemTriangulationTool/windows-ui/EdsmTriangulationInterface_${{needs.construct-version.outputs.version}}_x64.msix
+          asset_name: EdsmTriangulationInterface_${{needs.construct-version.outputs.version}}_x64.msix
           asset_content_type: application/zip
