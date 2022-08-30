@@ -39,7 +39,6 @@ jobs:
         uses: mindsers/changelog-reader-action@v2
         with:
           validation_level: warn
-          version: ${{ steps.version.outputs.version }}
           path: ./CHANGELOG.md
           
   build-windows-ui:
