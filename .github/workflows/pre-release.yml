@@ -1,4 +1,4 @@
-name: Release
+name: Prerelease
 
 on:
   push:
@@ -30,9 +30,10 @@ jobs:
           format: "${major}.${minor}.${patch}"
           bump_each_commit: false
     
-      - uses: vemel/update-changelog@0.0.1
+      - name: Update changelog
+        uses: thomaseizinger/keep-a-changelog-new-release@v1
         with:
-          version: ${{ steps.version.outputs.version }}
+          tag: ${{ steps.version.outputs.version }}
 
       - name: Commit updated CHANGELOG
         uses: stefanzweifel/git-auto-commit-action@v4
