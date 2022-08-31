@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    branches: [ "develop" ]
+
+jobs:
+  update-changelog:
+    runs-on: windows-2022
+    name: Construct Version
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      changelog-statement: ${{ steps.changelog.outputs.changes }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Calculate Version String
+        id: version
+        uses: paulhatch/semantic-version@v4.0.2
+        with:
+          tag_prefix: "v"
+          major_pattern: "(MAJOR)"
+          minor_pattern: "(MINOR)"
+          format: "${major}.${minor}.${patch}"
+          bump_each_commit: false
+    
+      - uses: vemel/update-changelog@0.0.1
+        with:
+          version: ${{ steps.version.outputs.version }}
+
+      - name: Commit updated CHANGELOG
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update CHANGELOG
+          file_pattern: CHANGELOG.md
