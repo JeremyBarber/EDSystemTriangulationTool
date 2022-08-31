@@ -33,7 +33,7 @@ jobs:
       - name: Update changelog
         uses: thomaseizinger/keep-a-changelog-new-release@v1
         with:
-          tag: ${{ steps.version.outputs.version }}
+          version: ${{ steps.version.outputs.version }}
 
       - name: Commit updated CHANGELOG
         uses: stefanzweifel/git-auto-commit-action@v4
