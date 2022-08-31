@@ -19,7 +19,7 @@
 		<ApplicationIdGuid>BD08BF2C-E629-4C6F-8A39-D9A4F1150CCE</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>0.0.0.0</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>0.0.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
@@ -41,7 +41,7 @@
     </Namespace>
   </PropertyGroup>
 
-  <Target Name="UpdateVersions" BeforeTargets="BeforeBuild">
+  <Target Name="UpdateVersions" BeforeTargets="BeforeBuild" Condition="'$(Configuration)' == 'Release'">
     <XmlPoke
       XmlInputPath="Platforms/Windows/Package.appxmanifest"
       Namespaces="$(Namespace)"
