@@ -40,3 +40,4 @@ jobs:
         with:
           commit_message: Update CHANGELOG
           file_pattern: CHANGELOG.md
+          push_options: '--force'
