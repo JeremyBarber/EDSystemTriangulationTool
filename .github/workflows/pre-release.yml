@@ -9,15 +9,17 @@ env:
 
 jobs:
   update-changelog:
+
+    # This stops the workflow running recursively when we push the updated changelog
+    if: github.actor != 'workflows-bot' 
+
     runs-on: windows-2022
     name: Construct Version
-    outputs:
-      version: ${{ steps.version.outputs.version }}
-      changelog-statement: ${{ steps.changelog.outputs.changes }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
+          token: ${{ secrets.PAT }}
           fetch-depth: 0
 
       - name: Calculate Version String
@@ -41,3 +43,4 @@ jobs:
           commit_message: Update CHANGELOG
           file_pattern: CHANGELOG.md
           push_options: '--force'
+          commit_user_name: workflows-bot
