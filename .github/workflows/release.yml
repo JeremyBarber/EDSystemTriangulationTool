@@ -54,18 +54,20 @@ jobs:
         with:
           version: ${{needs.construct-version.outputs.version}}
 
-      - name: Commit updated CHANGELOG
+      - name: Commit updated CHANGELOG to main
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           branch: main
-          commit_message: Update CHANGELOG
+          commit_message: '[Automated] Update CHANGELOG'
           file_pattern: CHANGELOG.md
 
-      - name: Merge CHANGELOG back to develop
-        uses: robotology/gh-action-nightly-merge@v1.3.3
+      - name: Merging new CHANGELOG back to develop
+        uses: everlytic/branch-merge@1.1.2
         with:
-          stable_branch: 'main'
-          development_branch: 'develop'
+          github_token: ${{ secrets.PAT }}
+          source_ref: main
+          target_branch: develop
+          commit_message_template: '[Automated] Merged main into target develop'
     
       - name: Get CHANGELOG Entry
         uses: mindsers/changelog-reader-action@v2
