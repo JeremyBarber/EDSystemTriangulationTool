@@ -1,8 +1,11 @@
 name: Release
 
 on:
-  push:
-    branches: [ "main" ]
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
     
 env:
   DOTNET_NOLOGO: true                     # Disable the .NET logo
@@ -13,17 +16,16 @@ env:
 jobs:
   construct-version:
     runs-on: windows-2022
-    name: Construct Version
+    name: Construct version
     outputs:
       version: ${{ steps.version.outputs.version }}
-      changelog-statement: ${{ steps.changelog.outputs.changes }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
           
-      - name: Calculate Version String
+      - name: Calculate version string
         id: version
         uses: paulhatch/semantic-version@v4.0.2
         with:
@@ -32,10 +34,39 @@ jobs:
           minor_pattern: "(MINOR)"
           format: "${major}.${minor}.${patch}.${increment}"
           bump_each_commit: false
+
+  update-changelog:
+    runs-on: windows-2022
+    needs: construct-version
+    name: Update Changelog
+    outputs:
+      changelog-statement: ${{ steps.changelog.outputs.changes }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PAT }}
+
+      - name: Update CHANGELOG
+        uses: thomaseizinger/keep-a-changelog-new-release@v1
+        with:
+          version: ${{needs.construct-version.outputs.version}}
+
+      - name: Commit updated CHANGELOG
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update CHANGELOG
+          file_pattern: CHANGELOG.md
+
+      - name: Merge CHANGELOG back to develop
+        uses: robotology/gh-action-nightly-merge@v1.3.3
+        with:
+          stable_branch: 'main'
+          development_branch: 'develop'
     
-      - name: Get Changelog Entry
-        id: changelog
+      - name: Get CHANGELOG Entry
         uses: mindsers/changelog-reader-action@v2
+        id: changelog
         with:
           validation_level: warn
           path: ./CHANGELOG.md
@@ -88,7 +119,7 @@ jobs:
   
   publish-release:
     runs-on: windows-2022
-    needs: [construct-version, windows-ui-build]
+    needs: [construct-version, update-changelog, windows-ui-build]
     name: Publish Release
     steps:
       - name: Download All Artifacts
