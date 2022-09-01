@@ -11,7 +11,7 @@ jobs:
   update-changelog:
 
     # This stops the workflow running recursively when we push the updated changelog
-    if: github.actor != 'workflows-bot' 
+    if: github.event.head_commit.message != 'Update CHANGELOG'
 
     runs-on: windows-2022
     name: Construct Version
