@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.14] - 2022-09-01
 
+## [0.0.14] - 2022-09-01
+
 ### Added
 
 Did a thing
@@ -26,6 +28,8 @@ The CI/CD
 -   Constructed the basics of the application
 
 [Unreleased]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.0.14...HEAD
+
+[0.0.14]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.0.14...0.0.14
 
 [0.0.14]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.0.14...0.0.14
 
