@@ -53,20 +53,6 @@ jobs:
         uses: thomaseizinger/keep-a-changelog-new-release@v1
         with:
           version: ${{ needs.construct-version.outputs.version }}
-
-      - name: Commit updated CHANGELOG to main
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          branch: main
-          commit_message: '[Automated] Update CHANGELOG'
-          file_pattern: CHANGELOG.md
-
-      - name: Commit updated CHANGELOG to develop
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          branch: develop
-          commit_message: '[Automated] Update CHANGELOG'
-          file_pattern: CHANGELOG.md
     
       - name: Get CHANGELOG Entry
         uses: mindsers/changelog-reader-action@v2
@@ -75,6 +61,13 @@ jobs:
           version: ${{ needs.construct-version.outputs.version }}
           validation_level: warn
           path: ./CHANGELOG.md
+
+      - name: Commit updated CHANGELOG
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: main
+          commit_message: '[Automated] Update CHANGELOG'
+          file_pattern: CHANGELOG.md
           
   windows-ui-build:
     runs-on: windows-2022
