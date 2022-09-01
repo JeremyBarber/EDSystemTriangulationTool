@@ -52,7 +52,7 @@ jobs:
       - name: Update CHANGELOG
         uses: thomaseizinger/keep-a-changelog-new-release@v1
         with:
-          version: ${{needs.construct-version.outputs.version}}
+          version: ${{ needs.construct-version.outputs.version }}
 
       - name: Commit updated CHANGELOG to main
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -73,6 +73,7 @@ jobs:
         uses: mindsers/changelog-reader-action@v2
         id: changelog
         with:
+          version: ${{ needs.construct-version.outputs.version }}
           validation_level: warn
           path: ./CHANGELOG.md
           
