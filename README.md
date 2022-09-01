@@ -17,6 +17,10 @@ When you have narrowed the list of targets down enough, you can select a target 
 
 The progam is available as a UI for Windows 10, IOS, and Android as well as a Command Line tool for those of you feeling a little old school
 
+## Contributing
+
+Contributions are more than welcome. Please read the [Contribution Guidelines](CONTRIBUTING.md) for instructions on raising a PR..
+
 ## Dependencies and Credits
 
 All system data is pulled from the APIs made available by the fine folks over at [EDSM](https://www.edsm.net/).
