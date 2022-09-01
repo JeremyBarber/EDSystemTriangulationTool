@@ -23,6 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
+          ref: 'main'
           fetch-depth: 0
           
       - name: Calculate version string
@@ -45,6 +46,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
+          ref: 'main'
           token: ${{ secrets.PAT }}
 
       - name: Update CHANGELOG
@@ -55,6 +57,7 @@ jobs:
       - name: Commit updated CHANGELOG
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
+          branch: main
           commit_message: Update CHANGELOG
           file_pattern: CHANGELOG.md
 
@@ -79,6 +82,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
+          ref: 'main'
           fetch-depth: 0
 
       - name: Setup .NET 6
