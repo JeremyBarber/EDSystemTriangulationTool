@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Moved the release pipeline over to ubuntu where possible for compatability
 -   Removed the prerelease pipeline
+-   Changed to trigger off pull requests
 
 ## [0.0.14.0] - 2022-09-01
 
