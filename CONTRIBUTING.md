@@ -6,10 +6,6 @@ Please feel to raise MRs to fix or add things to this little app.
 
 When constructing a pull request, please follow the instructions below:
 
-### Branch
-
-- Raise MRs against the `develop` branch. This will ensure that your changes are packaged correctly for the next release
-
 ### Changelog
 
 - Add a description of your changes to the `Unreleased` section of the `CHANGELOG`.
