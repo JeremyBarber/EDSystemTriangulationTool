@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (Minor) Got a complete version of the workflows pipeline up and running for deploying the application
 
-## 0.0.1 - 2022-08-30
+## [0.0.1] - 2022-08-30
 
 ### Added
 
