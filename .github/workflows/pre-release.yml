@@ -4,9 +4,6 @@ on:
   push:
     branches: [ "develop" ]
 
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 jobs:
   update-changelog:
 
@@ -42,5 +39,4 @@ jobs:
         with:
           commit_message: Update CHANGELOG
           file_pattern: CHANGELOG.md
-          push_options: '--force'
           commit_user_name: workflows-bot
