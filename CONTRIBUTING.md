@@ -16,9 +16,9 @@ When constructing a pull request, please follow the instructions below:
 
 - The formatting of this section should follow the formatting of [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), although you can look at previous entries to get an idea.
 
-- Lines added to the `CHANGELOG` should start with `(Major)`, `(Minor)` or, `(Patch)` to mark their severity according to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+### Pull Request
 
-- The lines added to `CHANGELOG` should be copied into the pull request description
+- The PR Title should start with `(MAJOR)`, `(MINOR)` or, `(PATCH)` to mark their severity according to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Version numbers
 

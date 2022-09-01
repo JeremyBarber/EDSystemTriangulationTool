@@ -9,16 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.14] - 2022-09-01
 
+## [0.0.14.0] - 2022-09-01
+
 ### Added
 
-(Minor) Got a complete version of the workflows pipeline up and running for deploying the application
+-   Got a complete version of the workflows pipeline up and running for deploying the application
 
-## [0.0.1] - 2022-08-30
+## [0.0.1.0] - 2022-08-30
+
+=======
 
 ### Added
 
 -   Constructed the basics of the application
 
 [Unreleased]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.0.14...HEAD
+
+[0.0.14]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.0.14.0...0.0.14
 
 [0.0.14]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.0.1...0.0.14
