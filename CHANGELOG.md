@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0.1] - 2022-09-01
+
 ## [0.0.14.0] - 2022-09-01
 
 ### Added
@@ -19,7 +21,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Constructed the basics of the application
 
-[Unreleased]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.1.0.0...HEAD
+[Unreleased]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.1.0.1...HEAD
+
+[0.1.0.1]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.0.14.0...0.1.0.1
 
 [0.1.0.0]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.0.14...0.1.0.0
 
