@@ -12,7 +12,6 @@ env:
 jobs:
   windows-ui-build:
     runs-on: windows-2022
-    needs: construct-version
     name: Windows UI Build
     steps:
       - name: Checkout
