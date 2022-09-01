@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0.6] - 2022-09-01
+
 ### Changed
 
-- Moved the release pipeline over to ubuntu where possible for compatability
+-   Moved the release pipeline over to ubuntu where possible for compatability
 
 ## [0.1.0.1] - 2022-09-01
 
@@ -25,7 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Constructed the basics of the application
 
-[Unreleased]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.1.0.1...HEAD
+[Unreleased]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.1.0.6...HEAD
+
+[0.1.0.6]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.1.0.1...0.1.0.6
 
 [0.1.0.1]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.0.14.0...0.1.0.1
 
