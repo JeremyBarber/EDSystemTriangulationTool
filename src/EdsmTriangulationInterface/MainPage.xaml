@@ -19,41 +19,53 @@
 
         <Image Grid.Row="1"
                Grid.Column="0"
-               Source="galaxy_map.png" />
+               x:Name="sourceListBackground"
+               Source="galaxy_map.png"
+               Style="{StaticResource BackgroundImage}" />
         <Image Grid.Row="1"
                Grid.Column="1"
-               Source="realistic_galaxy_map.png" />
+               x:Name="targetListBackground"
+               Source="realistic_galaxy_map.png"
+               Style="{StaticResource BackgroundImage}" />
         <Image Grid.Row="2"
                Grid.Column="0"
-               Source="planetary_data_unknown_mission.png" />
+               x:Name="addSourceBackground"
+               Source="planetary_data_unknown_mission.png"
+               Style="{StaticResource BackgroundImage}" />
         <Image Grid.Row="2"
                Grid.Column="1"
-               Source="normal_map.png" />
+               x:Name="targetDetailsBackground"
+               Source="normal_map.png"
+               Style="{StaticResource BackgroundImage}" />
 
         <Image Grid.Row="1"
                Grid.Column="0"
                x:Name="sourceListSpinner"
                IsVisible="false"
                Source="ed_spinnner.gif"
-               IsAnimationPlaying="true" />
+               IsAnimationPlaying="true"
+               Style="{StaticResource ForegroundImage}" />
         <Image Grid.Row="1"
                Grid.Column="1"
                x:Name="targetListSpinner"
                IsVisible="false"
                Source="ed_spinnner.gif"
-               IsAnimationPlaying="true" />
+               IsAnimationPlaying="true"
+               Style="{StaticResource ForegroundImage}" />
         <Image Grid.Row="2"
                Grid.Column="0"
                x:Name="addSourceSpinner"
                IsVisible="false"
                Source="ed_spinnner.gif"
-               IsAnimationPlaying="true" />
+               IsAnimationPlaying="true"
+               Style="{StaticResource ForegroundImage}" />
         <Image Grid.Row="2"
                Grid.Column="1"
                x:Name="targetDetailsSpinner"
                IsVisible="false"
                Source="ed_spinnner.gif"
-               IsAnimationPlaying="true" />
+               IsAnimationPlaying="true"
+               Style="{StaticResource ForegroundImage}" />
 
         <Label Grid.Row="0"
                Grid.ColumnSpan="2"
@@ -245,8 +257,33 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Label Text="{Binding Name}"
-                                       Style="{StaticResource SecondaryLabel}" />
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="10*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="10*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="50*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0"
+                                           IsVisible="{Binding IsStar}"
+                                           Source="expanding.png"
+                                           Style="{StaticResource ForegroundImage}" />
+                                    <Image Grid.Column="0"
+                                           IsVisible="{Binding IsPlanet}"
+                                           Source="planet.png"
+                                           Style="{StaticResource ForegroundImage}" />
+                                    <Image Grid.Column="2"
+                                           IsVisible="{Binding IsLandable}"
+                                           Source="recall_fighter.png"
+                                           Style="{StaticResource ForegroundImage}" /> 
+                                    <Label Grid.Column="4"
+                                           Text="{Binding Name}"
+                                           Style="{StaticResource SecondaryLabel}" />
+                                </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -267,7 +304,7 @@
                Text="{Binding Version, StringFormat='Version: {0:F0}'}"
                HorizontalOptions="End"
                VerticalOptions="Center"
-               Style="{StaticResource TertiaryLabel}"/>
+               Style="{StaticResource TertiaryLabel}" />
 
     </Grid>
 
