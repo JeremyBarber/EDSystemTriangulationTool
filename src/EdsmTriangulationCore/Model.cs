@@ -103,6 +103,10 @@ namespace EDSMTriangulationCore.Services
             else
             {
                 var response = await _client.SendRequest<SphereSystemsResponse>(request);
+                if (response == null)
+                {
+                    throw new Exception("Well, that didn't work");
+                }
                 _sphereSystemsCache.Add(requestKey, response);
                 return response.Select(x => x.name).ToHashSet();
             }

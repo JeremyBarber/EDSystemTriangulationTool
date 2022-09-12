@@ -1,4 +1,4 @@
-﻿using Edsm.Sdk.Model.Edsm;
+﻿using Edsm.Sdk.Dto;
 
 namespace Edsm.Sdk
 {
