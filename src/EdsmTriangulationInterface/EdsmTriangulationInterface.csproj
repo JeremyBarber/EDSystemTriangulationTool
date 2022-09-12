@@ -42,11 +42,7 @@
   </PropertyGroup>
 
   <Target Name="UpdateVersions" BeforeTargets="BeforeBuild" Condition="'$(Configuration)' == 'Release'">
-    <XmlPoke
-      XmlInputPath="Platforms/Windows/Package.appxmanifest"
-      Namespaces="$(Namespace)"
-      Query="/dn:Package/dn:Identity/@Version"
-      Value="$(Version)"/>
+    <XmlPoke XmlInputPath="Platforms/Windows/Package.appxmanifest" Namespaces="$(Namespace)" Query="/dn:Package/dn:Identity/@Version" Value="$(Version)" />
   </Target>
 
   <ItemGroup>
@@ -67,11 +63,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Maui" Version="1.2.0" />
 	  <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\EdsmTriangulationCore\EdsmTriangulationCore.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="AboutPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-﻿using EdsmTriangulationCore;
+﻿using CommunityToolkit.Maui.Views;
+using EdsmTriangulationCore;
 using EdsmTriangulationInterface.ModelView;
 using ListViewDemos.ViewModels;
 
@@ -85,6 +86,8 @@ namespace EdsmTriangulationInterface
 
         public async void OnAboutButtonClicked(object sender, EventArgs e)
         {
+            this.ShowPopup(new AboutPage());
+
             var helpText = new List<string>
             {
                 "A little tool that I hope was useful",
@@ -95,7 +98,7 @@ namespace EdsmTriangulationInterface
                 "Good luck out there CMDR"
             };
 
-            await DisplayAlert("About", string.Join(Environment.NewLine, helpText), "Close");
+            //await DisplayAlert("About", string.Join(Environment.NewLine, helpText), "Close");
         }
 
         private async Task RunWithErrorHandling(Func<Task> command)

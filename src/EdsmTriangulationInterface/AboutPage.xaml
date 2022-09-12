@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="EdsmTriangulationInterface.AboutPage"
+               Color="{StaticResource Background}"
+               Size="500,400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="9*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Text="About"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Style="{StaticResource PrimaryLabel}" />
+
+        <Border Grid.Row="1"
+                Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="6*" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Row="1"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="3"
+                   Source="anaconda.png"
+                   Style="{StaticResource BackgroundImage}" />
+                <Image Grid.Row="1"
+                   Grid.Column="0"
+                   Source="elite_icon.png"
+                   Style="{StaticResource ForegroundImage}" />
+                <Label Grid.Row="0"
+                       Grid.Column="2"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Style="{StaticResource TertiaryLabel}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Thanks for using my silly little tool, I hope it was helpful to you" />
+                            <Span Text="&#10;&#10;&#10;&#10;All system data is pulled from the APIs made available by the fine folks over at " />
+                            <Span Text="EDSM"
+                                  Style="{StaticResource HyperlinkSpan}">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TapCommand}"
+                                                          CommandParameter="https://www.edsm.net/" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                            <Span Text="&#10;&#10;All images and colour schemes are based on the wonderful fan creations at " />
+                            <Span Text="ED Assets"
+                                  Style="{StaticResource HyperlinkSpan}">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TapCommand}"
+                                                          CommandParameter="https://edassets.org/#/" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                            <Span Text="&#10;&#10;If you encounter any issues or you want to suggest something " />
+                            <Span Text="then please open an issue here"
+                                  Style="{StaticResource HyperlinkSpan}">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TapCommand}"
+                                                          CommandParameter="https://github.com/JeremyBarber/EDSystemTriangulationTool/issues" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                            <Span Text="&#10;&#10;&#10;&#10;Good luck out there, CMDR" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
+        </Border>
+    </Grid>
+</toolkit:Popup>

@@ -7,6 +7,7 @@
     <Color x:Key="Primary">#F07B05</Color>
     <Color x:Key="Secondary">#DFD8F7</Color>
     <Color x:Key="Tertiary">#FF7100</Color>
+    <Color x:Key="Contrast">#0A8BD6</Color>
 
     <Color x:Key="Foreground">#6E6E6E</Color>
     <Color x:Key="Midground">#212121</Color>
@@ -17,6 +18,7 @@
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
+    <SolidColorBrush x:Key="ContrastBrush" Color="{StaticResource Contrast}"/>
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource Background}"/>
     <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource Foreground}"/>
 

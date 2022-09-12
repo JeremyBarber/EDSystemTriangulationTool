@@ -57,6 +57,12 @@
            TargetType="Image">
     </Style>
 
+    <Style x:Key="HyperlinkSpan"  
+           TargetType="Span">
+        <Setter Property="TextColor" Value="{StaticResource Contrast}" />
+        <Setter Property="TextDecorations" Value="Underline" />
+    </Style>
+
     <Style x:Key="PrimaryLabel"  
            TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource Primary}" />
