@@ -1,4 +1,4 @@
-﻿using Edsm.Sdk.Model.Edsm;
+﻿using Edsm.Sdk.Dto;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 
