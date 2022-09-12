@@ -125,6 +125,9 @@ namespace EdsmTriangulationInterface
 
             sourcesListView.IsVisible = !isWaiting;
 
+            sourceListBackground.IsVisible = !isWaiting;
+            addSourceBackground.IsVisible = !isWaiting;
+
             sourceListSpinner.IsVisible = isWaiting;
             addSourceSpinner.IsVisible = isWaiting;
 
@@ -135,6 +138,8 @@ namespace EdsmTriangulationInterface
         {
             targetsListView.IsVisible = !isWaiting;
             targetListView.IsVisible = !isWaiting;
+            targetListBackground.IsVisible = !isWaiting;
+            targetDetailsBackground.IsVisible = !isWaiting;
 
             targetListSpinner.IsVisible = isWaiting;
             targetDetailsSpinner.IsVisible = isWaiting;
