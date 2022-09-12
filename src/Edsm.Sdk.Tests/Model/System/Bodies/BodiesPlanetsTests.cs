@@ -95,21 +95,21 @@ namespace Edsm.Sdk.Tests.Model.System.Bodies
             Assert.That(body.terraformingState, Is.EqualTo(terraforming));
         }
 
-        [TestCase("Sol", "Saturn", "D Ring", MiningType.Icy, 58071, 74500, 140180, Reserve.Common, TestName = "Common Ring")]
-        public async Task System_Body_Rings_Success(string systemName, string bodyName, string ringName, MiningType ringType, int mass, int minRadius, int maxRadius, Reserve reserves)
-        {
-            var request = new BodiesRequest(systemName);
+        //[TestCase("Sol", "Saturn", "D Ring", MiningType.Icy, 58071, 74500, 140180, Reserve.Common, TestName = "Common Ring")]
+        //public async Task System_Body_Rings_Success(string systemName, string bodyName, string ringName, MiningType ringType, int mass, int minRadius, int maxRadius, Reserve reserves)
+        //{
+        //    var request = new BodiesRequest(systemName);
 
-            var response = await Client.SendRequest<BodiesResponse>(request);
+        //    var response = await Client.SendRequest<BodiesResponse>(request);
 
-            var body = (Planet)response.bodies.Where(b => b.name == bodyName).Single();
+        //    var body = (Planet)response.bodies.Where(b => b.name == bodyName).Single();
 
-            Assert.That(body.rings.Single().name, Is.EqualTo(ringName));
-            Assert.That(body.rings.Single().type, Is.EqualTo(ringType));
-            Assert.That(body.rings.Single().mass, Is.EqualTo(mass));
-            Assert.That(body.rings.Single().innerRadius, Is.EqualTo(minRadius));
-            Assert.That(body.rings.Single().outerRadius, Is.EqualTo(maxRadius));
-            Assert.That(body.reserveLevel, Is.EqualTo(reserves));
-        }
+        //    Assert.That(body.rings.Single().name, Is.EqualTo(ringName));
+        //    Assert.That(body.rings.Single().type, Is.EqualTo(ringType));
+        //    Assert.That(body.rings.Single().mass, Is.EqualTo(mass));
+        //    Assert.That(body.rings.Single().innerRadius, Is.EqualTo(minRadius));
+        //    Assert.That(body.rings.Single().outerRadius, Is.EqualTo(maxRadius));
+        //    Assert.That(body.reserveLevel, Is.EqualTo(reserves));
+        //}
     }
 }

@@ -39,7 +39,7 @@ namespace Edsm.Sdk.Model.Types.Planets
         //public Dictionary<SurfaceConstituent, float> solidComposition;
         public Terraforming? terraformingState;
         //public Dictionary<RawMaterial, float> materials;
-        public List<MineableRegion> rings;
-        public Reserve? reserveLevel;
+        //public List<MineableRegion> rings;
+        //public Reserve? reserveLevel;
     }
 }

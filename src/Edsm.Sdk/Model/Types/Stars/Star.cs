@@ -15,7 +15,7 @@ namespace Edsm.Sdk.Model.Types.Stars
         public double? absoluteMagnitude;
         public double? solarMasses;
         public double? solarRadius;
-        public List<MineableRegion> belts;
+        //public List<MineableRegion> belts;
     }
 
     public class StarShort
