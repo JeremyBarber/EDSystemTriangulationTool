@@ -90,7 +90,7 @@ namespace Edsm.Sdk.Model.Edsm.Systems.System
         public readonly bool requirePermit;
         public readonly string permitName;
         public readonly Information information;
-        public readonly Star primaryStar;
+        public readonly StarShort primaryStar;
 
         public SphereSystemsResponseItem(
             float distance,
@@ -103,7 +103,7 @@ namespace Edsm.Sdk.Model.Edsm.Systems.System
             bool requirePermit,
             string permitName,
             Information information,
-            Star primaryStar)
+            StarShort primaryStar)
         {
             this.distance = distance;
             this.bodyCount = bodyCount;

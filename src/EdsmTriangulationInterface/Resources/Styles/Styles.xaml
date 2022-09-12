@@ -48,8 +48,13 @@
         <Setter Property="Padding" Value="10" />
     </Style>
 
-    <Style TargetType="Image">
+    <Style x:Key="BackgroundImage"
+           TargetType="Image">
         <Setter Property="BackgroundColor" Value="{StaticResource Midground}" />
+    </Style>
+
+    <Style x:Key="ForegroundImage"
+           TargetType="Image">
     </Style>
 
     <Style x:Key="PrimaryLabel"  
