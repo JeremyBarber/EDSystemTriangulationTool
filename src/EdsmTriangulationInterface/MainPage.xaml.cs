@@ -1,4 +1,5 @@
-﻿using EdsmTriangulationCore;
+﻿using CommunityToolkit.Maui.Views;
+using EdsmTriangulationCore;
 using EdsmTriangulationInterface.ModelView;
 using ListViewDemos.ViewModels;
 
@@ -33,7 +34,9 @@ namespace EdsmTriangulationInterface
         public async void OnSourceSelected(object sender, SelectedItemChangedEventArgs args)
         {
             var selectedSource = ((SourceViewModel)args.SelectedItem);
-            if (!await DisplayAlert("Would you like to remove the selected source?", $"{selectedSource.systemName} ({selectedSource.minRadius}-{selectedSource.radius})", "Delete", "Cancel"))
+            var choicePage = new ChoicePage($"{selectedSource.systemName} ({selectedSource.minRadius}-{selectedSource.radius})", "Would you like to remove the selected source?");
+            var delete = (bool?) await this.ShowPopupAsync(choicePage) ?? false;
+            if (!delete)
             {
                 return;
             }
@@ -85,17 +88,7 @@ namespace EdsmTriangulationInterface
 
         public async void OnAboutButtonClicked(object sender, EventArgs e)
         {
-            var helpText = new List<string>
-            {
-                "A little tool that I hope was useful",
-                "",
-                "Bug Reports",
-                "https://github.com/JeremyBarber/EDSystemTriangulationTool/issues",
-                "",
-                "Good luck out there CMDR"
-            };
-
-            await DisplayAlert("About", string.Join(Environment.NewLine, helpText), "Close");
+            this.ShowPopup(new AboutPage());
         }
 
         private async Task RunWithErrorHandling(Func<Task> command)
@@ -106,11 +99,14 @@ namespace EdsmTriangulationInterface
             }
             catch (UserFacingException ex)
             {
-                await DisplayAlert("Attention, CMDR!", ex.Message, "Continue");
+                this.ShowPopup(new ErrorPage("Attention, CMDR!", ex.Message, string.Empty));
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Attention, CMDR!", $"Something has gone wrong. I apologise for the convenience. The error is '{ex.Message}'", "Continue");
+                this.ShowPopup(new ErrorPage(
+                    "Oh dear, I'm really sorry CMDR", 
+                    "Something appears to have broken in a way I didn't expect. " + Environment.NewLine + Environment.NewLine +
+                    "Please consider opening a bug report and berating me (including a copy of the text below if you dont mind!)", ex.Message));
             }
         }
 
