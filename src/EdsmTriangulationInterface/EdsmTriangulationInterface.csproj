@@ -72,6 +72,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="ChoicePage.xaml.cs">
+	    <DependentUpon>ChoicePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="ErrorPage.xaml.cs">
+	    <DependentUpon>ErrorPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="ChoicePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="ErrorPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="AboutPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

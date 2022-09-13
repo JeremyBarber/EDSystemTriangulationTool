@@ -73,7 +73,7 @@
                     <Label Grid.Row="3"
                            HorizontalOptions="Center"
                            VerticalOptions="End"
-                           Text="Good luck out there, CMDR!"
+                           Text="Thanks to the Following!"
                            Style="{StaticResource PrimaryLabel}">
                     </Label>
                     <Label Grid.Row="4"
@@ -82,6 +82,7 @@
                            Style="{StaticResource TertiaryLabel}">
                         <Label.FormattedText>
                             <FormattedString>
+                                <Span Text="&#8226; Frontier Developments - The talented creators of Elite: Dangerous&#10;" />
                                 <Span Text="&#8226; EDSM.net - The fine folks providing the system data&#10;" />
                                 <Span Text="&#8226; EDAssets.org - The wonderful artists providing the Images&#10;" />
                                 <Span Text="&#8226; Something broken? Want to make a suggestion? Hit the button!&#10;" />
