@@ -26,22 +26,25 @@
                 Grid.Column="0">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="9*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="6*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="12*" />
                 </Grid.ColumnDefinitions>
-                <Image Grid.Row="1"
-                   Grid.Column="0"
-                   Grid.ColumnSpan="3"
-                   Source="anaconda.png"
-                   Style="{StaticResource BackgroundImage}" />
-                <Image Grid.Row="1"
-                   Grid.Column="0"
-                   Source="elite_icon.png"
-                   Style="{StaticResource ForegroundImage}" />
+                <Image Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.RowSpan="2"
+                       Grid.ColumnSpan="3"
+                       Source="anaconda.png"
+                       Style="{StaticResource BackgroundImage}" />
+                <Image Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.RowSpan="2"
+                       Source="elite_icon.png"
+                       Style="{StaticResource ForegroundImage}" />
                 <Label Grid.Row="0"
                        Grid.Column="2"
                        HorizontalOptions="Center"
@@ -49,35 +52,21 @@
                        Style="{StaticResource TertiaryLabel}">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Thanks for using my silly little tool, I hope it was helpful to you" />
-                            <Span Text="&#10;&#10;&#10;&#10;All system data is pulled from the APIs made available by the fine folks over at " />
-                            <Span Text="EDSM"
-                                  Style="{StaticResource HyperlinkSpan}">
-                                <Span.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding TapCommand}"
-                                                          CommandParameter="https://www.edsm.net/" />
-                                </Span.GestureRecognizers>
-                            </Span>
-                            <Span Text="&#10;&#10;All images and colour schemes are based on the wonderful fan creations at " />
-                            <Span Text="ED Assets"
-                                  Style="{StaticResource HyperlinkSpan}">
-                                <Span.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding TapCommand}"
-                                                          CommandParameter="https://edassets.org/#/" />
-                                </Span.GestureRecognizers>
-                            </Span>
-                            <Span Text="&#10;&#10;If you encounter any issues or you want to suggest something " />
-                            <Span Text="then please open an issue here"
-                                  Style="{StaticResource HyperlinkSpan}">
-                                <Span.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding TapCommand}"
-                                                          CommandParameter="https://github.com/JeremyBarber/EDSystemTriangulationTool/issues" />
-                                </Span.GestureRecognizers>
-                            </Span>
-                            <Span Text="&#10;&#10;&#10;&#10;Good luck out there, CMDR" />
+                            <Span Text="I hope this little tool has been helpful to you&#10;&#10;&#10;&#10;" />
+                            <Span Text="All system data is pulled from the APIs made available by the fine folks over at EDSM.net&#10;&#10;" />
+                            <Span Text="All images and colour schemes are based on the wonderful fan creations at EDAssets.org&#10;&#10;" />
+                            <Span Text="If you encounter any issues or you want to suggest something then please open an issue with the button below&#10;&#10;&#10;&#10;" />
+                            <Span Text="Good luck out there, CMDR" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
+                <Button Grid.Row="1"
+                        Grid.Column="2"
+                        Text="Report Bug"
+                        Clicked="OnBugReportButtonClicked"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Style="{StaticResource SecondaryButton}" />
             </Grid>
         </Border>
     </Grid>

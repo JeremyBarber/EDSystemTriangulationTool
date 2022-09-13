@@ -8,4 +8,10 @@ public partial class AboutPage : Popup
 	{
 		InitializeComponent();
 	}
+
+    public async void OnBugReportButtonClicked(object sender, EventArgs e)
+    {
+        var uri = new Uri("https://github.com/JeremyBarber/EDSystemTriangulationTool/issues");
+        await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+    }
 }

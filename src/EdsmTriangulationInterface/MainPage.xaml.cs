@@ -87,18 +87,6 @@ namespace EdsmTriangulationInterface
         public async void OnAboutButtonClicked(object sender, EventArgs e)
         {
             this.ShowPopup(new AboutPage());
-
-            var helpText = new List<string>
-            {
-                "A little tool that I hope was useful",
-                "",
-                "Bug Reports",
-                "https://github.com/JeremyBarber/EDSystemTriangulationTool/issues",
-                "",
-                "Good luck out there CMDR"
-            };
-
-            //await DisplayAlert("About", string.Join(Environment.NewLine, helpText), "Close");
         }
 
         private async Task RunWithErrorHandling(Func<Task> command)
