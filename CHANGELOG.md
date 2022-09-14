@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1.1] - 2022-09-14
+
 ### Added
 
 -   Overhaul of the error handling process and dialog boxes for consistency
@@ -49,7 +51,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Constructed the basics of the application
 
-[Unreleased]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.3.0.0...HEAD
+[Unreleased]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.3.1.1...HEAD
+
+[0.3.1.1]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.2.0.0...0.3.1.1
 
 [0.3.0.0]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.2.0.0...0.3.0.0
 
