@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.3.0.0] - 2022-09-13
+### Added
+
+-   Overhaul of the error handling process and dialog boxes for consistency
 
 ## [0.2.0.0] - 2022-09-12
 
