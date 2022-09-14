@@ -99,7 +99,7 @@ namespace EdsmTriangulationInterface
             }
             catch (UserFacingException ex)
             {
-                this.ShowPopup(new ErrorPage("Attention, CMDR!", ex.Message, string.Empty));
+                this.ShowPopup(new ErrorPage("Attention, CMDR!", ex.Message));
             }
             catch (Exception ex)
             {

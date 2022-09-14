@@ -104,7 +104,7 @@ namespace EDSMTriangulationCore.Services
             }
             else
             {
-                var response = await ClientSendRequestSafe<SphereSystemsResponse>(request);
+                var response = await ClientSendRequestSafe<SphereSystemsResponse>(request, true);
                 _sphereSystemsCache.Add(requestKey, response);
                 return response.Select(x => x.name).ToHashSet();
             }
