@@ -1,5 +1,6 @@
 ﻿using Edsm.Sdk;
 using Edsm.Sdk.Model.Edsm.Types;
+using EdsmTriangulationCore;
 using EDSMTriangulationCore.Services;
 using EdsmTriangulationInterface.ModelView;
 using System.Collections.ObjectModel;
@@ -12,6 +13,8 @@ namespace ListViewDemos.ViewModels
     public class TriangulationViewModel : INotifyPropertyChanged
     {
         private readonly IModel _model;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<SourceViewModel> Sources
         {
@@ -52,16 +55,19 @@ namespace ListViewDemos.ViewModels
 
         public async Task TryAddNewSource(string name, int minRadius, int maxRadius)
         {
-            if(await _model.CheckSourceExists(name))
+            if(!await _model.CheckSourceExists(name))
             {
-                await _model.AddSource(name, minRadius, maxRadius);
+                throw new InputValidationException($"System '{name}' does not appear to exist");
+            }
+            
+            if (minRadius > maxRadius)
+            {
+                throw new InputValidationException($"The minimum search radius '{minRadius}' is larger than the maxRadius '{maxRadius}'");
+            }
 
-                SyncSources();
-            }
-            else
-            {
-                throw new ArgumentException($"System name not recognised", nameof(name));
-            }
+            await _model.AddSource(name, minRadius, maxRadius);
+
+            SyncSources();
         }
 
         public async Task TryRemoveSelectedSource(SourceViewModel source)
@@ -101,13 +107,9 @@ namespace ListViewDemos.ViewModels
             OnPropertyChanged(nameof(TargetsCount));
         }
 
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        #endregion
     }
 }
