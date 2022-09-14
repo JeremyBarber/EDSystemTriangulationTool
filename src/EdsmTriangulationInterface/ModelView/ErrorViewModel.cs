@@ -7,10 +7,10 @@
         public string Details { get; private set; }
         public bool DetailsToShow
         {
-            get => string.IsNullOrWhiteSpace(Details);
+            get => !string.IsNullOrWhiteSpace(Details);
         }
 
-        public ErrorViewModel(string title, string message, string details)
+        public ErrorViewModel(string title, string message, string details = "")
         {
             Title = title;
             Message = message;

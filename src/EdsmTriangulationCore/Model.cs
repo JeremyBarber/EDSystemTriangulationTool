@@ -1,5 +1,7 @@
 ﻿using Edsm.Sdk;
+using Edsm.Sdk.Dto;
 using Edsm.Sdk.Model.Edsm.Systems.System;
+using EdsmTriangulationCore;
 
 namespace EDSMTriangulationCore.Services
 {
@@ -24,7 +26,7 @@ namespace EDSMTriangulationCore.Services
         {
             var request = new SystemRequest(systemName);
 
-            var response = await _client.SendRequest<SystemResponse>(request);
+            var response = await ClientSendRequestSafe<SystemResponse>(request);
 
             return response != null;
         }
@@ -68,7 +70,7 @@ namespace EDSMTriangulationCore.Services
             else
             {
                 
-                var response = await _client.SendRequest<BodiesResponse>(new BodiesRequest(name));
+                var response = await ClientSendRequestSafe<BodiesResponse>(new BodiesRequest(name));
                 _targetDetailsCache.Add(name, response);
                 return response;
             }
@@ -102,13 +104,34 @@ namespace EDSMTriangulationCore.Services
             }
             else
             {
-                var response = await _client.SendRequest<SphereSystemsResponse>(request);
-                if (response == null)
-                {
-                    throw new Exception("Well, that didn't work");
-                }
+                var response = await ClientSendRequestSafe<SphereSystemsResponse>(request, true);
                 _sphereSystemsCache.Add(requestKey, response);
                 return response.Select(x => x.name).ToHashSet();
+            }
+        }
+
+        private async Task<T?> ClientSendRequestSafe<T>(IEdsmRequest request, bool throwIfEmpty = false) where T : IEdsmResponse
+        {
+            try
+            {
+                var response = await _client.SendRequest<T>(request);
+
+                if (throwIfEmpty && response == null)
+                {
+                    throw new EdsmNullResponseException(
+                        "The response to an EDSM query was empty. " +
+                        "This usually indicates that you are trying to reference a system or body that does not exist. " +
+                        "If this problem persists, then please consider opening a bug report.");
+                }
+
+                return response;
+            }
+            catch (Exception ex) when (ex is HttpRequestException || ex is TaskCanceledException)
+            {
+                throw new EdsmConnectionException(
+                        "EDSM did not response in a timely manner to the request. " +
+                        "Please check your device is able to reach the internet, as that is a requirement for the app to function. " +
+                        "If you have checked your connection but are still seeing this, then please consider opening a bug report.");
             }
         }
     }
