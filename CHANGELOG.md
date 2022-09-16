@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0.0] - 2022-09-16
+
 ### Changed
 
 -   The EDSM SDK is now a standalone nuget package that is referenced by this project
@@ -55,7 +57,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Constructed the basics of the application
 
-[Unreleased]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.3.1.1...HEAD
+[Unreleased]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.4.0.0...HEAD
+
+[0.4.0.0]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.3.1.1...0.4.0.0
 
 [0.3.1.1]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.2.0.0...0.3.1.1
 
