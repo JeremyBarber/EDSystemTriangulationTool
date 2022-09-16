@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Edsm.Sdk\Edsm.Sdk.csproj" />
+    <PackageReference Include="Edsm.Sdk" Version="0.0.0.2" />
   </ItemGroup>
 
 </Project>

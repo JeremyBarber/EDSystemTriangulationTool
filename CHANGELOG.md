@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   The EDSM SDK is now a standalone nuget package that is referenced by this project
+
 ## [0.3.1.1] - 2022-09-14
 
 ### Added
