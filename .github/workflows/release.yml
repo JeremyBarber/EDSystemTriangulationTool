@@ -96,7 +96,7 @@ jobs:
       - name: Add Signing Certificate To Store
         shell: pwsh
         run: |
-          $password = ConvertTo-SecureString -String { secrets.PUBLISHING_PASSWORD }} -Force -AsPlainText
+          $password = ConvertTo-SecureString -String ${{ secrets.PUBLISHING_PASSWORD }} -Force -AsPlainText
           $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.PUBLISHING_BASE64 }}")
           $currentDirectory = Get-Location
           $certificatePath = Join-Path -Path $currentDirectory -ChildPath "MyCertificate.pfx"
