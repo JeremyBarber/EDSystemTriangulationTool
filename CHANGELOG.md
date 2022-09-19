@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0.0] - 2022-09-19
+
 ### Added
 
 -   Setting up the Windows Store release
@@ -63,7 +65,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Constructed the basics of the application
 
-[Unreleased]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.4.1.2...HEAD
+[Unreleased]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.5.0.0...HEAD
+
+[0.5.0.0]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.4.1.2...0.5.0.0
 
 [0.4.1.2]: https://github.com/JeremyBarber/EDSystemTriangulationTool/compare/0.4.0.0...0.4.1.2
 
