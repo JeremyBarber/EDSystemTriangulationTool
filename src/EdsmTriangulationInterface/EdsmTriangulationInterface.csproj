@@ -39,6 +39,7 @@
     <Namespace>
       <Namespace Prefix="dn" Uri="http://schemas.microsoft.com/appx/manifest/foundation/windows10" />
     </Namespace>
+    <DefaultLanguage>en</DefaultLanguage>
   </PropertyGroup>
 
   <Target Name="UpdateVersions" BeforeTargets="BeforeBuild" Condition="'$(Configuration)' == 'Release'">
