@@ -18,7 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Construct version
     outputs:
-      version: ${{ steps.version.outputs.version }}
+      version-short: ${{ steps.version.outputs.version-short }}
+      version-long: ${{ steps.version.outputs.version-long }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -27,13 +28,23 @@ jobs:
           fetch-depth: 0
           
       - name: Calculate version string
-        id: version
+        id: version-long
         uses: paulhatch/semantic-version@v4.0.2
         with:
           tag_prefix: "v"
           major_pattern: "(MAJOR)"
           minor_pattern: "(MINOR)"
           format: "${major}.${minor}.${patch}.${increment}"
+          bump_each_commit: false
+
+      - name: Calculate version string
+        id: version-short
+        uses: paulhatch/semantic-version@v4.0.2
+        with:
+          tag_prefix: "v"
+          major_pattern: "(MAJOR)"
+          minor_pattern: "(MINOR)"
+          format: "${major}.${minor}.${patch}"
           bump_each_commit: false
 
   update-changelog:
@@ -60,7 +71,7 @@ jobs:
       - name: Update CHANGELOG
         uses: thomaseizinger/keep-a-changelog-new-release@v1
         with:
-          version: ${{ needs.construct-version.outputs.version }}
+          version: ${{ needs.construct-version.outputs.version-long }}
 
       - name: Commit updated CHANGELOG
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -105,10 +116,10 @@ jobs:
         
         # Currently a bug in MAUI building means that using --no-restore and --no-build can cause build failures
       - name: Build MAUI Windows
-        run: dotnet build -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{needs.construct-version.outputs.version}} .\src\EDSMTriangulation.sln
+        run: dotnet build -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{needs.construct-version.outputs.version-short}}.0 .\src\EDSMTriangulation.sln
         
       - name: Publish MAUI Windows
-        run: dotnet publish -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{needs.construct-version.outputs.version}} /p:PackageCertificateThumbprint=${{secrets.PUBLISHING_THUMBPRINT}} .\src\EDSMTriangulation.sln
+        run: dotnet publish -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{needs.construct-version.outputs.version-short}}.0 /p:PackageCertificateThumbprint=${{secrets.PUBLISHING_THUMBPRINT}} .\src\EDSMTriangulation.sln
 
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v2.3.1
@@ -129,14 +140,14 @@ jobs:
         uses: actions/create-release@v1
         id: create-release
         with:
-          release_name: v${{ needs.construct-version.outputs.version }}
-          tag_name: v${{ needs.construct-version.outputs.version }}
+          release_name: v${{ needs.construct-version.outputs.version-long }}
+          tag_name: v${{ needs.construct-version.outputs.version-long }}
           body: ${{ needs.construct-version.outputs.changelog-statement }}
           
       - name: Upload Release
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ${{steps.download.outputs.download-path}}/windows-ui/net6.0-windows10.0.19041.0/win10-x64/AppPackages/EdsmTriangulationInterface_${{needs.construct-version.outputs.version}}_Test/EdsmTriangulationInterface_${{needs.construct-version.outputs.version}}_x64.msix
-          asset_name: EdsmTriangulation_Windows_${{needs.construct-version.outputs.version}}_x64.msix
+          asset_path: ${{steps.download.outputs.download-path}}/windows-ui/net6.0-windows10.0.19041.0/win10-x64/AppPackages/EdsmTriangulationInterface_${{needs.construct-version.outputs.version-short}}.0_Test/EdsmTriangulationInterface_${{needs.construct-version.outputs.version-short}}.0_x64.msix
+          asset_name: EdsmTriangulation_Windows_${{needs.construct-version.outputs.version-short}}.0_x64.msix
           asset_content_type: application/zip
