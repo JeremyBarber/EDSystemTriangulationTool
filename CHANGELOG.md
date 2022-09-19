@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Setting up the Windows Store release
+
 ## [0.4.1.2] - 2022-09-19
 
 ## [0.4.0.0] - 2022-09-16
