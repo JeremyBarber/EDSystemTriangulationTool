@@ -73,7 +73,7 @@
                     <Label Grid.Row="3"
                            HorizontalOptions="Center"
                            VerticalOptions="End"
-                           Text="Thanks to the Following!"
+                           Text="Thanks to the Following:"
                            Style="{StaticResource PrimaryLabel}">
                     </Label>
                     <Label Grid.Row="4"
