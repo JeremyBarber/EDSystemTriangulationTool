@@ -18,8 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Construct version
     outputs:
-      version-short: ${{ steps.version.outputs.version-short }}
-      version-long: ${{ steps.version.outputs.version-long }}
+      version-short: ${{ steps.version-short.outputs.version }}
+      version-long: ${{ steps.version-long.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
