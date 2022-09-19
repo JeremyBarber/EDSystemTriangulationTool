@@ -2,7 +2,7 @@
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" IgnorableNamespaces="uap rescap">
   <Identity Name="51956JeremyBarber.EDSMSystemTriangulation" Publisher="CN=BA314F38-CEE5-4925-BECF-BEE1D133D89F" Version="0.4.0.0" />
   <Properties>
-    <DisplayName>51956JeremyBarber.EDSMSystemTriangulation_wj0fabqmssw2t</DisplayName>
+    <DisplayName>EDSM System Triangulation</DisplayName>
     <PublisherDisplayName>Jeremy Barber</PublisherDisplayName>
     <Logo>$placeholder$.png</Logo>
   </Properties>
