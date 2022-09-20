@@ -15,11 +15,11 @@ When you have narrowed the list of targets down enough, you can select a target 
 
 ## [Releases](https://github.com/JeremyBarber/EDSystemTriangulationTool/releases)
 
-The progam is available as a UI for Windows 10, IOS, and Android as well as a Command Line tool for those of you feeling a little old school
+The progam is available as a UI for Windows 10, IOS, and Android as well as a Command Line tool for those of you feeling a little old school.
 
 ## Contributing
 
-Contributions are more than welcome. Please read the [Contribution Guidelines](CONTRIBUTING.md) for instructions on raising a PR..
+Contributions are more than welcome. Please read the [Contribution Guidelines](CONTRIBUTING.md) for instructions on raising a PR.
 
 ## Dependencies and Credits
 
@@ -27,7 +27,7 @@ All system data is pulled from the APIs made available by the fine folks over at
 
 All images and colour schemes are based on the wonderful fan creations at [EDAssets](https://edassets.org/#/).
 
-This app is built in .NET 6.0 and the UI is using the .NET MAUI multi-platform UI framework. Some aspects of MAUI are still very new, so there are some issues (mostly surrounding UI styling and theming) that I am currently unable to fix.
+This app is built in .NET 6.0 and the UI is using the .NET MAUI multi-platform UI framework.
 
 ## Bug Reports
 
