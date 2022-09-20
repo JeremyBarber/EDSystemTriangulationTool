@@ -7,7 +7,9 @@
 
 Welcome CMDR! This little tool is designed to solve triangulation puzzles in Elite Dangerous, such as those found in Listening Posts.
 
-![alt text](https://github.com/JeremyBarber/EDSystemTriangulationTool/blob/main/SCREENSHOT.png?raw=true)
+<p align="center">
+  <img src="SCREENSHOT.png" width="350" title="hover text">
+</p>
 
 To use it, simply put in the name of a system and the distance around it in which to look for systems. This will populate a list of target systems that match that criteria.
 
