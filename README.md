@@ -35,4 +35,6 @@ Use the Issues tab above to raise issues and feature requests.
 
 ### [License](LICENSE.md)
 
+### [Privacy Policy](PRIVACY.md)
+
 ### [Changelog](CHANGELOG.md)
