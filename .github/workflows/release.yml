@@ -101,9 +101,6 @@ jobs:
         run: |
           dotnet workload install maui --ignore-failed-sources
 
-      - name: Restore Dependencies
-        run: dotnet restore src/EDSMTriangulation.sln
-
       - name: Add Signing Certificate To Store
         shell: pwsh
         run: |
@@ -113,10 +110,6 @@ jobs:
           $certificatePath = Join-Path -Path $currentDirectory -ChildPath "MyCertificate.pfx"
           [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
           Import-PfxCertificate -FilePath $certificatePath -CertStoreLocation Cert:\CurrentUser\My -Password $password           
-        
-        # Currently a bug in MAUI building means that using --no-restore and --no-build can cause build failures
-      - name: Build MAUI Windows
-        run: dotnet build -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{needs.construct-version.outputs.version-short}}.0 .\src\EDSMTriangulation.sln
         
       - name: Publish MAUI Windows
         run: dotnet publish -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{needs.construct-version.outputs.version-short}}.0 /p:PackageCertificateThumbprint=${{secrets.PUBLISHING_THUMBPRINT}} .\src\EDSMTriangulation.sln
@@ -148,9 +141,6 @@ jobs:
         run: |
           dotnet workload install maui --ignore-failed-sources
 
-      - name: Restore Dependencies
-        run: dotnet restore src/EDSMTriangulation.sln
-
       - name: Add Keystore To Builld Directory
         shell: pwsh
         run: |
@@ -158,11 +148,7 @@ jobs:
           $currentDirectory = Get-Location
           $keystorePath = Join-Path -Path $currentDirectory -ChildPath "\src\EdsmTriangulationInterface\myapp.keystore"
           [IO.File]::WriteAllBytes("$keystorePath", $keystore_byte)   
-        
-        # Currently a bug in MAUI building means that using --no-restore and --no-build can cause build failures
-      - name: Build MAUI Android
-        run: dotnet build -c Release -f net6.0-android /p:ApplicationDisplayVersion=${{needs.construct-version.outputs.version-short}}.0 .\src\EDSMTriangulation.sln
-        
+
       - name: Publish MAUI Android
         run: dotnet publish -c Release -f net6.0-android /p:ApplicationDisplayVersion=${{needs.construct-version.outputs.version-short}}.0 /p:AndroidSigningKeyPass=${{ secrets.KEYSTORE_PASSWORD }} /p:AndroidSigningStorePass=${{ secrets.KEYSTORE_PASSWORD }} .\src\EDSMTriangulation.sln
 
