@@ -175,13 +175,6 @@ jobs:
           tag_name: v${{ needs.construct-version.outputs.version-long }}
           body: ${{ needs.construct-version.outputs.changelog-statement }}
 
-      - name: listthings
-        run: |
-         ls ${{steps.download.outputs.download-path}}
-         ls ${{steps.download.outputs.download-path}}/android
-         ls ${{steps.download.outputs.download-path}}/android/net6.0-android
-
-          
       - name: Upload Windows Artifact
         uses: actions/upload-release-asset@v1
         with:
@@ -194,6 +187,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ${{steps.download.outputs.download-path}}/android/net6.0-android/com.companyname.edsmtriangulationinterface-Signed.aab
+          asset_path: ${{steps.download.outputs.download-path}}/android/com.companyname.edsmtriangulationinterface-Signed.aab
           asset_name: EdsmTriangulation_Android_${{needs.construct-version.outputs.version-short}}.0.aab
           asset_content_type: application/zip
