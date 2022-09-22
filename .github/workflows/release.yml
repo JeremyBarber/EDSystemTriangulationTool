@@ -18,8 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Construct version
     outputs:
-      version-short: ${{ steps.version-short.outputs.version }}
       version-long: ${{ steps.version-long.outputs.version }}
+      version-release: ${{ steps.version-release.outputs.version }}
+      version-single: ${{ steps.total-commits.outputs.total-commits }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -27,7 +28,7 @@ jobs:
           ref: 'main'
           fetch-depth: 0
           
-      - name: Calculate version string
+      - name: Calculate Version
         id: version-long
         uses: paulhatch/semantic-version@v4.0.2
         with:
@@ -37,15 +38,19 @@ jobs:
           format: "${major}.${minor}.${patch}.${increment}"
           bump_each_commit: false
 
-      - name: Calculate version string
-        id: version-short
+      - name: Calculate Release Version
+        id: version-release
         uses: paulhatch/semantic-version@v4.0.2
         with:
           tag_prefix: "v"
           major_pattern: "(MAJOR)"
           minor_pattern: "(MINOR)"
-          format: "${major}.${minor}.${patch}"
+          format: "${major}.${minor}.${patch}.0"
           bump_each_commit: false
+
+      - name: Calculate Ratchet Version
+        uses: AlexHolderDeveloper/CommitsWithinTime@v1.1.5
+        id: total-commits
 
   update-changelog:
     runs-on: ubuntu-latest
@@ -112,7 +117,7 @@ jobs:
           Import-PfxCertificate -FilePath $certificatePath -CertStoreLocation Cert:\CurrentUser\My -Password $password           
         
       - name: Publish MAUI Windows
-        run: dotnet publish -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{needs.construct-version.outputs.version-short}}.0 /p:PackageCertificateThumbprint=${{secrets.PUBLISHING_THUMBPRINT}} .\src\EDSMTriangulation.sln
+        run: dotnet publish -c Release -f net6.0-windows10.0.19041.0 /p:ApplicationDisplayVersion=${{needs.construct-version.outputs.version-release}} /p:PackageCertificateThumbprint=${{secrets.PUBLISHING_THUMBPRINT}} .\src\EDSMTriangulation.sln
 
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v2.3.1
@@ -150,7 +155,7 @@ jobs:
           [IO.File]::WriteAllBytes("$keystorePath", $keystore_byte)   
 
       - name: Publish MAUI Android
-        run: dotnet publish -c Release -f net6.0-android /p:ApplicationDisplayVersion=${{needs.construct-version.outputs.version-short}}.0 /p:AndroidSigningKeyPass=${{ secrets.KEYSTORE_PASSWORD }} /p:AndroidSigningStorePass=${{ secrets.KEYSTORE_PASSWORD }} .\src\EDSMTriangulation.sln
+        run: dotnet publish -c Release -f net6.0-android /p:ApplicationVersion=${{needs.construct-version.outputs.version-single}} /p:ApplicationDisplayVersion=${{needs.construct-version.outputs.version-release}} /p:AndroidSigningKeyPass=${{ secrets.KEYSTORE_PASSWORD }} /p:AndroidSigningStorePass=${{ secrets.KEYSTORE_PASSWORD }} .\src\EDSMTriangulation.sln
 
       - name: Upload Android Artifact
         uses: actions/upload-artifact@v2.3.1
@@ -179,8 +184,8 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ${{steps.download.outputs.download-path}}/windows-ui/net6.0-windows10.0.19041.0/win10-x64/AppPackages/EdsmTriangulationInterface_${{needs.construct-version.outputs.version-short}}.0_Test/EdsmTriangulationInterface_${{needs.construct-version.outputs.version-short}}.0_x64.msix
-          asset_name: EdsmTriangulation_Windows_${{needs.construct-version.outputs.version-short}}.0_x64.msix
+          asset_path: ${{steps.download.outputs.download-path}}/windows-ui/net6.0-windows10.0.19041.0/win10-x64/AppPackages/EdsmTriangulationInterface_${{needs.construct-version.outputs.version-release}}_Test/EdsmTriangulationInterface_${{needs.construct-version.outputs.version-release}}_x64.msix
+          asset_name: EdsmTriangulation_Windows_${{needs.construct-version.outputs.version-release}}_x64.msix
           asset_content_type: application/zip
 
       - name: Upload Android Artifact
@@ -188,5 +193,5 @@ jobs:
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
           asset_path: ${{steps.download.outputs.download-path}}/android/com.companyname.edsmtriangulationinterface-Signed.aab
-          asset_name: EdsmTriangulation_Android_${{needs.construct-version.outputs.version-short}}.0.aab
+          asset_name: EdsmTriangulation_Android_${{needs.construct-version.outputs.version-release}}.aab
           asset_content_type: application/zip
