@@ -33,6 +33,3 @@ jobs:
         # Currently a bug in MAUI building means that using --no-restore and --no-build can cause build failures
       - name: Build MAUI Windows
         run: dotnet build -c Release -f net6.0-windows10.0.19041.0 .\src\EDSMTriangulation.sln
-
-      - name: Build MAUI Android
-        run: dotnet build -c Release -f net6.0-android .\src\EDSMTriangulation.sln
