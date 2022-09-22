@@ -20,7 +20,7 @@
         <Setter Property="FontFamily" Value="EuroCaps"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="CornerRadius" Value="8"/>
-        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Padding" Value="{OnPlatform Android=0, WinUI=10}"/>
     </Style>
 
     <Style x:Key="SecondaryButton"  
@@ -28,24 +28,24 @@
         <Setter Property="TextColor" Value="{StaticResource Primary}" />
         <Setter Property="BackgroundColor" Value="{StaticResource Background}" />
         <Setter Property="FontFamily" Value="EuroCaps"/>
-        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontSize" Value="{OnPlatform Android=12, WinUI=10}"/>
         <Setter Property="CornerRadius" Value="8"/>
-        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Padding" Value="{OnPlatform Android=0, WinUI=10}"/>
     </Style>
 
-    <Style x:Key="PrimaryEntry"
-           TargetType="Entry">
+    <Style TargetType="Entry">
         <Setter Property="TextColor" Value="{StaticResource Background}" />
         <Setter Property="BackgroundColor" Value="{StaticResource Foreground}" />
         <Setter Property="PlaceholderColor" Value="{StaticResource Secondary}" />
         <Setter Property="IsTextPredictionEnabled" Value="false" />
-        <Setter Property="HeightRequest" Value="30" />
+        <Setter Property="HeightRequest" Value="{OnPlatform Android=40, WinUI=30}" />
         <Setter Property="FontFamily" Value="EuroCaps"/>
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontSize" Value="{OnPlatform Android=12, WinUI=14}"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
     </Style>
 
     <Style TargetType="Grid">
-        <Setter Property="Padding" Value="10" />
+        <Setter Property="Padding" Value="{OnPlatform Android=0, WinUI=10}" />
     </Style>
 
     <Style x:Key="BackgroundImage"
@@ -67,7 +67,7 @@
            TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource Primary}" />
         <Setter Property="FontFamily" Value="EuroCaps"/>
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="{OnPlatform Android=18, WinUI=20}"/>
         <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
 
@@ -75,19 +75,19 @@
            TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource Primary}" />
         <Setter Property="FontFamily" Value="EuroCaps"/>
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontSize" Value="{OnPlatform Android=14, WinUI=14}"/>
     </Style>
 
     <Style x:Key="TertiaryLabel"  
            TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource Primary}" />
         <Setter Property="FontFamily" Value="EuroCaps"/>
-        <Setter Property="FontSize" Value="10"/>
-        <Setter Property="Padding" Value="10"/>
+        <Setter Property="FontSize" Value="{OnPlatform Android=12, WinUI=10}"/>
+        <Setter Property="Padding" Value="{OnPlatform Android=0, WinUI=10}"/>
     </Style>
 
     <Style TargetType="ListView">
-        <Setter Property="RowHeight" Value="50" />
+        <Setter Property="RowHeight" Value="{OnPlatform Android=40, WinUI=50}" />
     </Style>
 
     <Style TargetType="Slider">

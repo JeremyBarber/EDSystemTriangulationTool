@@ -4,7 +4,7 @@
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                x:Class="EdsmTriangulationInterface.AboutPage"
                Color="{StaticResource Background}"
-               Size="500,400">
+               Size="350,500">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -18,87 +18,100 @@
                 Grid.Column="0">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="6*" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="6*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="3*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="10*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="50*" />
                 </Grid.ColumnDefinitions>
+
                 <Image Grid.Row="0"
                        Grid.Column="0"
-                       Grid.ColumnSpan="4"
+                       Grid.RowSpan="12"
                        Source="anaconda.png"
                        Style="{StaticResource BackgroundImage}" />
-                <Image Grid.Row="0"
-                       Grid.Column="1"
+
+                <Label Grid.Row="0"
+                       HorizontalOptions="Center"
+                       VerticalOptions="End"
+                       Text="Instructions"
+                       Style="{StaticResource PrimaryLabel}">
+                </Label>
+                <Label Grid.Row="1"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start"
+                       Style="{StaticResource TertiaryLabel}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="&#8226; Add new Source systems to triangulate from&#10;" />
+                            <Span Text="&#8226; Tap a Source in the list to delete it&#10;" />
+                            <Span Text="&#8226; Targets are systems that are the correct distances from the sources&#10;" />
+                            <Span Text="&#8226; Tap a Target to see bodies in the system&#10;" />
+                            <Span Text="&#8226; Target details include body type and if it's landable&#10;" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Image Grid.Row="3"
+                       Grid.Column="0"
                        Source="elite_icon.png"
                        Style="{StaticResource ForegroundImage}" />
-
-                <Grid Grid.Row="0"
-                      Grid.Column="3">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="6*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="6*" />
-                        <RowDefinition Height="2*" />
-                    </Grid.RowDefinitions>
+                <Label Grid.Row="5"
+                       HorizontalOptions="Center"
+                       VerticalOptions="End"
+                       Text="Acknowledgements"
+                       Style="{StaticResource PrimaryLabel}">
+                </Label>
+                <Grid Grid.Row="6">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-
-                    <Label Grid.Row="0"
-                           HorizontalOptions="Center"
-                           VerticalOptions="End"
-                           Text="Instructions"
-                           Style="{StaticResource PrimaryLabel}">
-                    </Label>
-                    <Label Grid.Row="1"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Start"
-                           Style="{StaticResource TertiaryLabel}">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="&#8226; Add new Source systems to triangulate from&#10;" />
-                                <Span Text="&#8226; Tap a Source in the list to delete it&#10;" />
-                                <Span Text="&#8226; Targets are systems that are the correct distances from the sources&#10;" />
-                                <Span Text="&#8226; Tap a Target to see bodies in the system&#10;" />
-                                <Span Text="&#8226; Target details include body type and if it's landable&#10;" />
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <Label Grid.Row="3"
-                           HorizontalOptions="Center"
-                           VerticalOptions="End"
-                           Text="Thanks to the Following:"
-                           Style="{StaticResource PrimaryLabel}">
-                    </Label>
-                    <Label Grid.Row="4"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Start"
-                           Style="{StaticResource TertiaryLabel}">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="&#8226; Frontier Developments - The talented creators of Elite: Dangerous&#10;" />
-                                <Span Text="&#8226; EDSM.net - The fine folks providing the system data&#10;" />
-                                <Span Text="&#8226; EDAssets.org - The wonderful artists providing the images&#10;" />
-                                <Span Text="&#8226; Something broken? Want to make a suggestion? Hit the button!&#10;" />
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>                    
-                    <Button Grid.Row="5"
+                    <Button Grid.Column="0"
+                        Text="Elite"
+                        Clicked="OnEliteButtonClicked"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        Style="{StaticResource SecondaryButton}" />
+                    <Button Grid.Column="1"
+                        Text="EDSM"
+                        Clicked="OnEDSMButtonClicked"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        Style="{StaticResource SecondaryButton}" />
+                    <Button Grid.Column="2"
+                        Text="ED Assets"
+                        Clicked="OnEDAssetsButtonClicked"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        Style="{StaticResource SecondaryButton}" />
+                </Grid>
+                <Image Grid.Row="8"
+                       Grid.Column="0"
+                       Source="elite_icon.png"
+                       Style="{StaticResource ForegroundImage}" />
+                <Label Grid.Row="10"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start"
+                       Text="Something broken? Got a suggestion? Let me know!"
+                       Style="{StaticResource TertiaryLabel}" />
+                <Button Grid.Row="11"
                         Text="Report Bug Or Request Feature"
                         Clicked="OnBugReportButtonClicked"
                         HorizontalOptions="Center"
-                        VerticalOptions="End"
+                        VerticalOptions="Fill"
                         Style="{StaticResource SecondaryButton}" />
-
                 </Grid>
-
-            </Grid>
         </Border>
     </Grid>
 </toolkit:Popup>

@@ -55,6 +55,11 @@ namespace ListViewDemos.ViewModels
 
         public async Task TryAddNewSource(string name, int minRadius, int maxRadius)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new InputValidationException($"You have not supplied a system name");
+            }
+
             if(!await _model.CheckSourceExists(name))
             {
                 throw new InputValidationException($"System '{name}' does not appear to exist");
@@ -62,26 +67,26 @@ namespace ListViewDemos.ViewModels
             
             if (minRadius > maxRadius)
             {
-                throw new InputValidationException($"The minimum search radius '{minRadius}' is larger than the maxRadius '{maxRadius}'");
+                throw new InputValidationException($"The minimum search radius '{minRadius}' is larger than the maixmum search radius '{maxRadius}'");
             }
 
             await _model.AddSource(name, minRadius, maxRadius);
 
-            SyncSources();
+            RefreshDataModel();
         }
 
         public async Task TryRemoveSelectedSource(SourceViewModel source)
         {
             await _model.RemoveSource(source.systemName, source.minRadius, source.radius);
 
-            SyncSources();
+            RefreshDataModel();
         }
 
         public async Task RemoveMostRecentSource()
         {
             await _model.RemoveLastSource();
 
-            SyncSources();
+            RefreshDataModel();
         }
 
         public async Task SetTargetDetails(string name)
@@ -95,10 +100,10 @@ namespace ListViewDemos.ViewModels
                 _targetDetailsCollection = (await _model.GetTargetDetails(name)).bodies;
             }
 
-            SyncSources();
+            RefreshDataModel();
         }
 
-        private void SyncSources()
+        public void RefreshDataModel()
         {
             OnPropertyChanged(nameof(Sources));
             OnPropertyChanged(nameof(Targets));

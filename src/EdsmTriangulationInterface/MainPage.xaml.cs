@@ -33,17 +33,18 @@ namespace EdsmTriangulationInterface
 
         public async void OnSourceSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var selectedSource = ((SourceViewModel)args.SelectedItem);
-            var choicePage = new ChoicePage($"{selectedSource.systemName} ({selectedSource.minRadius}-{selectedSource.radius})", "Would you like to remove the selected source?");
-            var delete = (bool?) await this.ShowPopupAsync(choicePage) ?? false;
-            if (!delete)
-            {
-                return;
-            }
-
             ToggleSourcesWaiting(true);
             await RunWithErrorHandling(new Func<Task>(async () =>
-            {        
+            {
+                var selectedSource = ((SourceViewModel)args.SelectedItem);
+                var choicePage = new ChoicePage($"{selectedSource.systemName} ({selectedSource.minRadius}-{selectedSource.radius})", "Remove the selected source?");
+                var delete = (bool?)await this.ShowPopupAsync(choicePage) ?? false;
+                if (!delete)
+                {
+                    viewModel.RefreshDataModel();
+                    return;
+                }
+
                 await viewModel.TryRemoveSelectedSource(selectedSource);
 
                 if (!viewModel.Sources.Any())
@@ -104,9 +105,9 @@ namespace EdsmTriangulationInterface
             catch (Exception ex)
             {
                 this.ShowPopup(new ErrorPage(
-                    "Oh dear, I'm really sorry CMDR", 
+                    "Oh dear, I'm very sorry CMDR", 
                     "Something appears to have broken in a way I didn't expect. " + Environment.NewLine + Environment.NewLine +
-                    "Please consider opening a bug report and berating me (including a copy of the text below if you dont mind!)", ex.Message));
+                    "Please consider opening a bug report including a copy of the text below", ex.Message));
             }
         }
 

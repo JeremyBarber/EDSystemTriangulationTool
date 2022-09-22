@@ -1,3 +1,7 @@
 **/.vs/
 **/bin/
 **/obj/
+
+**/*.keystore
+**/*.pfx
+**/*.cer

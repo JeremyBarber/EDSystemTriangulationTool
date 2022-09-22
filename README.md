@@ -27,6 +27,8 @@ Contributions are more than welcome. Please read the [Contribution Guidelines](C
 
 ## Dependencies and Credits
 
+This app is entirely a third-party, open-source, fan project and is in no way affiliated with Frontier Developments or Elite: Dangerous itself.
+
 All system data is pulled from the APIs made available by the fine folks over at [EDSM](https://www.edsm.net/).
 
 All images and colour schemes are based on the wonderful fan creations at [EDAssets](https://edassets.org/#/).
