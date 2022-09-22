@@ -8,8 +8,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
-            <RowDefinition Height="20*" />
-            <RowDefinition Height="10*" />
+            <RowDefinition Height="{OnPlatform Android=15*, WinUI=20*}" />
+            <RowDefinition Height="{OnPlatform Android=15*, WinUI=10*}" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -93,7 +93,9 @@
                 <ListView Grid.Row="1"
                           ItemsSource="{Binding Sources}"
                           ItemSelected="OnSourceSelected"
-                          x:Name="sourcesListView">
+                          x:Name="sourcesListView"
+                          SeparatorVisibility="Default"
+                          VerticalScrollBarVisibility="Always">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -159,6 +161,7 @@
                         <DataTemplate>
                             <ViewCell>
                                 <Label Text="{Binding Name}"
+                                       VerticalOptions="Center"
                                        Style="{StaticResource SecondaryLabel}" />
                             </ViewCell>
                         </DataTemplate>
@@ -184,15 +187,14 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Row="0"
-                       Text="Add new source"
+                       Text="Add New Source"
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Start"
                        Style="{StaticResource PrimaryLabel}" />
 
                 <Entry Grid.Row="1"
                        x:Name="systemNameInput"
-                       Placeholder="Enter your System Name here"
-                       Style="{StaticResource PrimaryEntry}"/>
+                       Placeholder="System Name" />
 
                 <Label Grid.Row="2"
                        x:Name="minDistanceLabel"
@@ -206,8 +208,7 @@
                         Minimum="0"
                         Value="0"
                         Maximum="100"
-                        ValueChanged="OnMinDistanceValueChanged"
-                        VerticalOptions="Start" />
+                        ValueChanged="OnMinDistanceValueChanged" />
 
                 <Label Grid.Row="4"
                        x:Name="maxDistanceLabel"
@@ -221,8 +222,7 @@
                         Minimum="0"
                         Value="100"
                         Maximum="100"
-                        ValueChanged="OnMaxDistanceValueChanged"
-                        VerticalOptions="Start" />
+                        ValueChanged="OnMaxDistanceValueChanged" />
 
                 <Button Grid.Row="6"
                         x:Name="addButton"
@@ -281,6 +281,7 @@
                                            Source="recall_fighter.png"
                                            Style="{StaticResource ForegroundImage}" /> 
                                     <Label Grid.Column="4"
+                                           VerticalOptions="Center"
                                            Text="{Binding Name}"
                                            Style="{StaticResource SecondaryLabel}" />
                                 </Grid>

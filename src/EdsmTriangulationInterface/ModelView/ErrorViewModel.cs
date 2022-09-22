@@ -5,9 +5,13 @@
         public string Title { get; private set; }
         public string Message { get; private set; }
         public string Details { get; private set; }
-        public bool DetailsToShow
+        public bool DetailsMissing
         {
-            get => !string.IsNullOrWhiteSpace(Details);
+            get => string.IsNullOrWhiteSpace(Details);
+        }
+        public bool DetailsPresent
+        {
+            get => !DetailsMissing;
         }
 
         public ErrorViewModel(string title, string message, string details = "")

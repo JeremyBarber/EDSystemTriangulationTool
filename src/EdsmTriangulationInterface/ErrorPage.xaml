@@ -4,7 +4,7 @@
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                x:Class="EdsmTriangulationInterface.ErrorPage"
                Color="{StaticResource Background}"
-               Size="500,300">
+               Size="300,300">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -22,19 +22,11 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="10*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="50*" />
                 </Grid.ColumnDefinitions>
                 <Image Grid.Row="0"
                        Grid.Column="0"
-                       Grid.ColumnSpan="4"
                        Source="anaconda.png"
                        Style="{StaticResource BackgroundImage}" />
-                <Image Grid.Row="0"
-                       Grid.Column="1"
-                       Source="elite_icon.png"
-                       Style="{StaticResource ForegroundImage}" />
 
                 <Grid Grid.Row="0"
                       Grid.Column="3">
@@ -57,15 +49,21 @@
                            Style="{StaticResource PrimaryLabel}" />
                     <Label Grid.Row="2"
                            Grid.Column="0"
+                           HorizontalTextAlignment="Center"
                            HorizontalOptions="Center"
                            VerticalOptions="Start"
                            Text="{Binding Message}"
                            Style="{StaticResource SecondaryLabel}" />
+                    <Image Grid.Row="4"
+                           Grid.Column="0"
+                           Source="elite_icon.png"
+                           IsVisible="{Binding DetailsMissing}"
+                           Style="{StaticResource ForegroundImage}" />
                     <Border Grid.Row="4"
                             Grid.Column="0"
                             HorizontalOptions="Center"
                             VerticalOptions="Start"
-                            IsVisible="{Binding DetailsToShow}"
+                            IsVisible="{Binding DetailsPresent}"
                             Padding="0">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -83,8 +81,8 @@
                             <Button Grid.Column="1"
                                     Text="Copy"
                                     Clicked="OnCopyErrorButtonClicked"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"
+                                    HorizontalOptions="Fill"
+                                    VerticalOptions="Fill"
                                     Style="{StaticResource SecondaryButton}" />
                         </Grid>
                     </Border>
