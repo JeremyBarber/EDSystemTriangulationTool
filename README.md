@@ -3,11 +3,9 @@
 
 # Elite Dangerous Triangulation Tool
 
-<script type="module" src="https://getbadgecdn.azureedge.net/ms-store-badge.bundled.js"></script>
-<ms-store-badge
-	productid="9NGNDVDX58XD"
-	animation="on">
-</ms-store-badge>
+<a href="ms-windows-store://pdp/?ProductId=9NGNDVDX58XD&mode=mini">
+   <img src="https://getbadgecdn.azureedge.net/images/en-us%20dark.svg" alt="Download" />
+</a>
 
 ## What Is This?
 
