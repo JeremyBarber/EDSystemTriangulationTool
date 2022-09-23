@@ -3,6 +3,12 @@
 
 # Elite Dangerous Triangulation Tool
 
+<script type="module" src="https://getbadgecdn.azureedge.net/ms-store-badge.bundled.js"></script>
+<ms-store-badge
+	productid="9NGNDVDX58XD"
+	animation="on">
+</ms-store-badge>
+
 ## What Is This?
 
 Welcome CMDR! This little tool is designed to solve triangulation puzzles in Elite Dangerous, such as those found in Listening Posts.
@@ -16,10 +22,6 @@ To use it, simply put in the name of a system and the distance around it in whic
 As you add more and more systems to the sources list, the list of target systems will be limited to those that match all the source criteria at the same time, restricting the list of systems.
 
 When you have narrowed the list of targets down enough, you can select a target system to see a list of bodies in the system.
-
-## [Releases](https://github.com/JeremyBarber/EDSystemTriangulationTool/releases)
-
-The progam is available as a UI for Windows 10, IOS, and Android as well as a Command Line tool for those of you feeling a little old school.
 
 ## Contributing
 
