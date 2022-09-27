@@ -3,9 +3,9 @@
 
 # Elite Dangerous Triangulation Tool
 
-<a href="ms-windows-store://pdp/?ProductId=9NGNDVDX58XD&mode=mini">
-   <img src="https://getbadgecdn.azureedge.net/images/en-us%20dark.svg" alt="Download" />
-</a>
+| Windows | Android |
+|:-:|:-:|
+| [<img src="https://getbadgecdn.azureedge.net/images/en-us%20dark.svg" style="width:180px;"/>](ms-windows-store://pdp/?ProductId=9NGNDVDX58XD) | [<img src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' style="width:250px;">](https://play.google.com/store/apps/details?id=com.companyname.edsmtriangulationinterface&hl=en_GB&gl=US&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1) |
 
 ## What Is This?
 
@@ -34,6 +34,8 @@ All system data is pulled from the APIs made available by the fine folks over at
 All images and colour schemes are based on the wonderful fan creations at [EDAssets](https://edassets.org/#/).
 
 This app is built in .NET 6.0 and the UI is using the .NET MAUI multi-platform UI framework.
+
+Google Play and the Google Play logo are trademarks of Google LLC. Microsoft and the Microsoft logo are trademarks of Microsoft LLC.
 
 ## Bug Reports
 
