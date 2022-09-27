@@ -5,7 +5,7 @@
 
 | Windows | Android |
 |:-:|:-:|
-| [<img src="https://getbadgecdn.azureedge.net/images/en-us%20dark.svg" style="width:180px;"/>](ms-windows-store://pdp/?ProductId=9NGNDVDX58XD) | [<img src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' style="width:250px;">](https://play.google.com/store/apps/details?id=com.companyname.edsmtriangulationinterface&hl=en_GB&gl=US&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1) |
+| [<img src="https://getbadgecdn.azureedge.net/images/en-us%20dark.svg" style="width:180px;"/>](https://apps.microsoft.com/store/detail/edsm-system-triangulation/9NGNDVDX58XD?hl=en-am&gl=am) | [<img src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' style="width:250px;">](https://play.google.com/store/apps/details?id=com.companyname.edsmtriangulationinterface&hl=en_GB) |
 
 ## What Is This?
 
